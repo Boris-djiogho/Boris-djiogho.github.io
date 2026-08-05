@@ -144,11 +144,26 @@ const npcFarben = [
   {hemd:"#e2d3a1", haut:"#6b4226", haar:"#0f0a05"},
 ];
 const npcs = [
-  {x:10*TILE, y:6*TILE,  dir:[1,0],  t:0, f:0},
-  {x:40*TILE, y:7*TILE,  dir:[0,1],  t:0, f:1},
-  {x:28*TILE, y:30*TILE, dir:[-1,0], t:0, f:2},
-  {x:8*TILE,  y:29*TILE, dir:[0,-1], t:0, f:3},
+  {x:10*TILE, y:6*TILE,  dir:[1,0],  t:0, f:0, name:"Lea",
+   zeile:{de:"Nicht vergessen: StuPa-Sitzung heute um 18 Uhr! Wir brauchen deine Stimme.",
+          en:"Don't forget: student parliament meeting today at 6 pm! We need your vote."}},
+  {x:40*TILE, y:7*TILE,  dir:[0,1],  t:0, f:1, name:"Tom",
+   zeile:{de:"Wir gehen am Wochenende zum Weinfest in der Freiburger Altstadt. Kommst du mit?",
+          en:"We are going to the wine festival in Freiburg's old town this weekend. Want to join?"}},
+  {x:28*TILE, y:30*TILE, dir:[-1,0], t:0, f:2, name:"Amina",
+   zeile:{de:"Samstag ist kamerunischer Abend im Mokele Mbembe. Das ganze CSK kommt!",
+          en:"Saturday is Cameroonian night at Mokele Mbembe. The whole CSK crew is coming!"}},
+  {x:8*TILE,  y:29*TILE, dir:[0,-1], t:0, f:3, name:"Michel",
+   zeile:{de:"Wir kochen morgen zusammen Ndole. Du bringst die Kochbananen mit, ja?",
+          en:"We are cooking ndole together tomorrow. You bring the plantains, right?"}},
+  {x:26*TILE, y:15*TILE, dir:[0,1],  t:0, f:1, name:"Jonas",
+   zeile:{de:"Nach der Vorlesung Kaffee in der Bibliothek? Ich muss dir was zu Gurobi zeigen.",
+          en:"Coffee at the library after the lecture? I have to show you something about Gurobi."}},
+  {x:25*TILE, y:20*TILE, dir:[1,0],  t:0, f:0, name:"Karla",
+   zeile:{de:"Lust auf eine Wanderung am Wochenende? Der Wald ruft, wie damals im Oberharz!",
+          en:"Fancy a hike this weekend? The forest is calling, just like back in the Harz!"}},
 ];
+window.__npcs = npcs;   // Debug-Zugriff
 function npcBlockiert(px,py){
   const punkte = [[px,py],[px+10,py],[px,py+12],[px+10,py+12]];
   return punkte.some(([qx,qy])=>{
@@ -159,6 +174,7 @@ function npcBlockiert(px,py){
 }
 function bewegeNpcs(){
   npcs.forEach(n=>{
+    if(n===aktiverNpc){ n.dir=[0,0]; return; }   // spricht gerade
     n.t--;
     if(n.t<=0){
       const optionen = [[1,0],[-1,0],[0,1],[0,-1],[0,0],[0,0]];
@@ -299,7 +315,9 @@ window.__tasten = tasten;
 window.addEventListener("keydown", e=>{
   if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," "].includes(e.key)) e.preventDefault();
   tasten[e.key.toLowerCase()] = true;
-  if(e.key === "Enter" || e.key === "Escape") schliesseModal();
+  if(e.key === "Enter" || e.key === "Escape"){
+    if(aktiverNpc) schliesseNpcDialog(); else schliesseModal();
+  }
 });
 window.addEventListener("keyup", e=>{ tasten[e.key.toLowerCase()] = false; });
 document.querySelectorAll("#dpad button").forEach(b=>{
@@ -340,6 +358,40 @@ document.getElementById("sprachBtn").addEventListener("click", ()=>{
   localStorage.setItem("bd-sprache", sprache);
   wendeSpracheAn();
 });
+
+/* ---------- NPC-Dialog ---------- */
+let aktiverNpc = null;
+let letzterNpc = null;
+const npcDialogEl = document.getElementById("npcDialog");
+
+function zeigeNpcDialog(n){
+  aktiverNpc = n;
+  document.getElementById("npcName").textContent = n.name;
+  document.getElementById("npcText").textContent = n.zeile[sprache];
+  npcDialogEl.classList.add("an");
+}
+function schliesseNpcDialog(){
+  if(aktiverNpc){ letzterNpc = aktiverNpc; aktiverNpc = null; }
+  npcDialogEl.classList.remove("an");
+}
+npcDialogEl.addEventListener("click", schliesseNpcDialog);
+window.__pruefeNpcs = ()=>pruefeNpcs();   // Debug
+
+function pruefeNpcs(){
+  if(modalOffen) return;
+  const px = spieler.x + spieler.b/2, py = spieler.y + spieler.h/2;
+  let naechster = null, nDist = 1e9;
+  npcs.forEach(n=>{
+    const d = Math.hypot(n.x+5-px, n.y+6-py);
+    if(d < nDist){ nDist = d; naechster = n; }
+  });
+  if(naechster && nDist < 26){
+    if(!aktiverNpc && naechster !== letzterNpc) zeigeNpcDialog(naechster);
+  } else {
+    if(aktiverNpc) schliesseNpcDialog();
+    if(nDist > 40) letzterNpc = null;
+  }
+}
 
 /* ---------- Modal ---------- */
 const modal = document.getElementById("modal");
@@ -545,6 +597,7 @@ function loop(){
     if(!blockiert(nx, spieler.y)) spieler.x = nx;
     if(!blockiert(spieler.x, ny)) spieler.y = ny;
     pruefeStationen();
+    pruefeNpcs();
   }
 
   let ox, oy;

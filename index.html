@@ -91,6 +91,33 @@ canvas{display:block;image-rendering:pixelated;}
 }
 .modal-schliessen:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 rgba(0,0,0,0.5);}
 
+/* ===== NPC-Dialog (RPG-Textbox) ===== */
+#npcDialog{
+  position:fixed; left:50%; bottom:70px; transform:translateX(-50%) translateY(12px);
+  z-index:25; width:min(560px, calc(100vw - 32px));
+  background:rgba(15,20,32,0.96);
+  border:3px solid var(--akzent);
+  box-shadow:6px 6px 0 rgba(0,0,0,0.5);
+  padding:16px 20px 14px;
+  opacity:0; pointer-events:none;
+  transition:opacity .18s ease, transform .18s ease;
+}
+#npcDialog.an{ opacity:1; transform:translateX(-50%) translateY(0); }
+#npcName{
+  font-family:var(--pixel); font-size:0.62rem; color:var(--akzent);
+  text-transform:uppercase; letter-spacing:0.1em;
+  display:inline-block; margin-bottom:8px;
+  background:rgba(245,179,1,0.12); border:1px solid rgba(245,179,1,0.4);
+  padding:5px 10px 3px;
+}
+#npcText{ color:var(--text); font-size:0.98rem; line-height:1.55; }
+.npc-hinweis{
+  position:absolute; right:12px; bottom:8px;
+  font-family:var(--pixel); font-size:0.5rem; color:var(--gedimmt);
+  animation:blinken 1.2s steps(2) infinite;
+}
+@keyframes blinken{ 50%{ opacity:0.25; } }
+
 /* ===== Mobile D-Pad ===== */
 #dpad{position:fixed;bottom:18px;left:18px;z-index:20;display:none;
   grid-template-columns:repeat(3,54px);grid-template-rows:repeat(3,54px);gap:4px;opacity:0.85;}
@@ -123,6 +150,12 @@ canvas{display:block;image-rendering:pixelated;}
   <span></span><button data-r="up">▲</button><span></span>
   <button data-r="left">◀</button><span></span><button data-r="right">▶</button>
   <span></span><button data-r="down">▼</button><span></span>
+</div>
+
+<div id="npcDialog">
+  <span id="npcName"></span>
+  <p id="npcText"></p>
+  <span class="npc-hinweis">[ENTER]</span>
 </div>
 
 <div id="modal">
