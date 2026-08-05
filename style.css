@@ -7,8 +7,10 @@
   --text-gedimmt: #9aa5b8;
   --akzent: #f5b301;
   --akzent-dunkel: #c79100;
+  --gruen: #4cd07d;
   --linie: #2a3550;
-  --radius: 14px;
+  --radius: 4px;
+  --pixel: "Press Start 2P", monospace;
   --max-breite: 1080px;
 }
 *{ margin:0; padding:0; box-sizing:border-box; }
@@ -31,7 +33,7 @@ a{ color: var(--akzent); }
   border-bottom: 1px solid var(--linie);
 }
 .nav-logo{
-  font-weight:800; font-size:1.1rem; text-decoration:none;
+  font-family: var(--pixel); font-size:0.85rem; text-decoration:none;
   color: var(--bg);
   background: var(--akzent);
   padding: 4px 10px; border-radius: 8px;
@@ -54,8 +56,8 @@ a{ color: var(--akzent); }
   box-shadow: 0 12px 40px rgba(0,0,0,0.45);
 }
 .hero-text{ flex:1; min-width: 300px; }
-.hero-hallo{ color: var(--akzent); font-weight:600; letter-spacing:0.06em; }
-.hero h1{ font-size: clamp(2.1rem, 5vw, 3.4rem); line-height:1.1; margin: 6px 0 16px; }
+.hero-hallo{ color: var(--akzent); font-family: var(--pixel); font-size:0.72rem; letter-spacing:0.06em; }
+.hero h1{ font-family: var(--pixel); font-size: clamp(1.15rem, 3.2vw, 2.1rem); line-height:1.55; margin: 10px 0 18px; text-transform: uppercase; }
 .hero-claim{ font-size:1.15rem; color: var(--text-gedimmt); max-width: 560px; }
 .hero-claim strong{ color: var(--text); }
 .hero-chips{ margin: 20px 0; display:flex; gap:10px; flex-wrap:wrap; }
@@ -69,19 +71,20 @@ a{ color: var(--akzent); }
 .btn{
   display:inline-block; text-decoration:none;
   color: var(--text); background: var(--bg-karte);
-  border: 1px solid var(--linie); border-radius: 10px;
-  padding: 10px 18px; font-weight:600; font-size:0.95rem;
-  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+  border: 2px solid var(--linie); border-radius: 0;
+  padding: 12px 18px 10px; font-family: var(--pixel); font-size:0.68rem;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.55);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
 }
-.btn:hover{ transform: translateY(-2px); border-color: var(--akzent); }
+.btn:hover{ transform: translate(2px,2px); box-shadow: 2px 2px 0 rgba(0,0,0,0.55); border-color: var(--akzent); }
 .btn-primary{ background: var(--akzent); border-color: var(--akzent); color: #141002; }
 .btn-primary:hover{ background: var(--akzent-dunkel); }
-.btn-gross{ padding: 14px 26px; font-size: 1.05rem; }
+.btn-gross{ padding: 16px 26px 14px; font-size: 0.78rem; }
 
 /* ===== Sektionen ===== */
 .section{ max-width: var(--max-breite); margin: 0 auto; padding: 64px 24px; }
-.section h2{ font-size: 1.9rem; margin-bottom: 18px; }
-.h2-num{ color: var(--akzent); font-size: 1.1rem; vertical-align: middle; margin-right: 10px; font-family: "SF Mono", ui-monospace, monospace; }
+.section h2{ font-family: var(--pixel); font-size: 1.15rem; line-height:1.6; margin-bottom: 18px; text-transform: uppercase; }
+.h2-num{ color: var(--akzent); font-size: 0.9rem; vertical-align: middle; margin-right: 10px; }
 .section-intro{ color: var(--text-gedimmt); margin-bottom: 28px; max-width: 640px; }
 
 /* ===== Über mich ===== */
@@ -106,12 +109,12 @@ a{ color: var(--akzent); }
 .t-item.sichtbar{ opacity:1; transform:none; }
 .t-item::before{
   content:""; position:absolute; left:-27px; top:10px;
-  width:12px; height:12px; border-radius:50%;
+  width:12px; height:12px; border-radius:0;
   background: var(--akzent); box-shadow: 0 0 0 4px rgba(245,179,1,0.18);
 }
 .t-badge{
-  display:inline-block; font-family:"SF Mono", ui-monospace, monospace;
-  font-size:0.85rem; color: var(--akzent); margin-bottom: 6px;
+  display:inline-block; font-family: var(--pixel);
+  font-size:0.62rem; color: var(--akzent); margin-bottom: 6px;
 }
 .t-card{
   background: var(--bg-karte); border:1px solid var(--linie);
@@ -120,6 +123,24 @@ a{ color: var(--akzent); }
 .t-card h3{ font-size:1.1rem; margin-bottom: 8px; }
 .t-card p{ color: var(--text-gedimmt); font-size: 0.97rem; }
 .t-card em{ color: var(--text); font-style: normal; font-weight:600; }
+
+/* ===== Nachhaltigkeit ===== */
+.h2-num-gruen{ color: var(--gruen); }
+.t-card-gruen{ border-color: rgba(76,208,125,0.45); }
+.gruen-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.gruen-karte{
+  background: var(--bg-karte); border:1px solid rgba(76,208,125,0.35);
+  border-radius: var(--radius); padding: 24px;
+  opacity:0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease;
+}
+.gruen-karte.sichtbar{ opacity:1; transform:none; }
+.gruen-karte:hover{ border-color: var(--gruen); }
+.gruen-schritt{
+  font-family:"SF Mono", ui-monospace, monospace; font-size:0.8rem;
+  color: var(--gruen); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.gruen-karte h3{ margin-bottom: 8px; font-size:1.05rem; }
+.gruen-karte p{ color: var(--text-gedimmt); font-size:0.95rem; }
 
 /* ===== Projekte ===== */
 .projekt-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }

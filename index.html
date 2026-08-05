@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boris Morgan Djiogho Keou – Wirtschaftsinformatiker</title>
 <meta name="description" content="Boris Morgan Djiogho Keou – Wirtschaftsinformatiker (M.Sc.) aus Freiburg. KI, Datenanalyse, Operations Research und Prozessdigitalisierung.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
 </head>
@@ -15,6 +18,7 @@
   <div class="nav-links">
     <a href="#ueber">Über mich</a>
     <a href="#reise">Meine Reise</a>
+    <a href="#nachhaltigkeit">Nachhaltigkeit</a>
     <a href="#projekte">Projekte</a>
     <a href="#kompetenzen">Kompetenzen</a>
     <a href="#kontakt">Kontakt</a>
@@ -131,6 +135,18 @@
     </div>
 
     <div class="t-item">
+      <div class="t-badge">2022</div>
+      <div class="t-card t-card-gruen">
+        <h3>♻️ Bachelorarbeit: Elektroschrott &amp; Kreislaufwirtschaft</h3>
+        <p>Quantitative Datenanalyse der Rückgabemöglichkeiten von Elektro- und
+        Elektronikaltgeräten in Deutschland (Note 1,7). Meine Motivation war persönlich: die
+        Elektroschrott-Müllkippen in Afrika, auf denen Kinder statt in der Schule zwischen
+        Altgeräten nach Metallen suchen. Nachhaltigkeit wurde damit zum roten Faden meiner
+        akademischen Arbeit.</p>
+      </div>
+    </div>
+
+    <div class="t-item">
       <div class="t-badge">2022 – 2026</div>
       <div class="t-card">
         <h3>💼 Forvis Mazars — Digital Solutions</h3>
@@ -154,12 +170,39 @@
       <div class="t-badge">2026</div>
       <div class="t-card">
         <h3>⛰️ Freiburg — angekommen</h3>
-        <p>Der Liebe wegen in den Breisgau gezogen — nach über fünf Jahren Fernbeziehung. Hier
-        beginnt das nächste Kapitel: der Berufseinstieg an der Schnittstelle von KI, Daten und
-        Geschäftsprozessen.</p>
+        <p>Schon während meiner Clausthaler Jahre habe ich Freiburg mehrmals besucht — und mich
+        in die Stadt verliebt: Schwarzwald vor der Tür, Sonne, Lebensfreude. 2026 bin ich ganz
+        hierhergezogen. Hier beginnt das nächste Kapitel: der Berufseinstieg an der
+        Schnittstelle von KI, Daten und Geschäftsprozessen.</p>
       </div>
     </div>
 
+  </div>
+</section>
+
+<section class="section" id="nachhaltigkeit">
+  <h2><span class="h2-num h2-num-gruen">♻</span> Roter Faden: Nachhaltigkeit</h2>
+  <p class="section-intro">Von der Elektroschrott-Kippe bis zum Elektroauto — meine akademische
+  Arbeit folgt einer Überzeugung: Technologie muss Teil der Lösung sein.</p>
+  <div class="gruen-grid">
+    <div class="gruen-karte">
+      <div class="gruen-schritt">Der Antrieb</div>
+      <h3>E-Schrott-Kippen in Afrika</h3>
+      <p>Ausrangierte Geräte aus Europa landen auf Müllkippen in Afrika — mit Folgen für Umwelt,
+      Gesundheit und die Bildung von Kindern. Dieses Bild hat meine Forschung geprägt.</p>
+    </div>
+    <div class="gruen-karte">
+      <div class="gruen-schritt">Bachelorarbeit · Note 1,7</div>
+      <h3>Kreislaufwirtschaft</h3>
+      <p>Quantitative Analyse, wie und wo Elektroaltgeräte in Deutschland zurückgegeben werden —
+      und warum sich Sammelmengen und Verbraucherverhalten regional unterscheiden.</p>
+    </div>
+    <div class="gruen-karte">
+      <div class="gruen-schritt">Masterarbeit · Note 1,0</div>
+      <h3>E-Mobilität optimieren</h3>
+      <p>Tourenplanung für Elektrofahrzeuge mit nichtlinearen Ladefunktionen — damit elektrische
+      Logistik nicht nur sauber, sondern auch effizient ist.</p>
+    </div>
   </div>
 </section>
 
@@ -268,7 +311,7 @@
 <script>
 // Sanfte Einblend-Animation beim Scrollen — mit Fallbacks, damit Inhalte nie verborgen bleiben
 (function(){
-  const elemente = document.querySelectorAll('.t-item, .projekt-karte, .skill-gruppe');
+  const elemente = document.querySelectorAll('.t-item, .projekt-karte, .skill-gruppe, .gruen-karte');
 
   function zeige(el){ el.classList.add('sichtbar'); }
 
