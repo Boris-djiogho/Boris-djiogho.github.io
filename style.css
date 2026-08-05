@@ -16,7 +16,13 @@
 *{ margin:0; padding:0; box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 body{
-  background: var(--bg);
+  background-color: var(--bg);
+  /* feine Pixel-Punkt-Textur, bewusst kaum sichtbar */
+  background-image:
+    radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    radial-gradient(rgba(245,179,1,0.018) 1px, transparent 1px);
+  background-size: 28px 28px, 56px 56px;
+  background-position: 0 0, 14px 14px;
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.65;
@@ -44,7 +50,23 @@ a{ color: var(--akzent); }
 .nav-links a:hover{ color: var(--akzent); }
 
 /* ===== Hero ===== */
-.hero{ padding: 72px 24px 56px; }
+.hero{
+  padding: 72px 24px 96px;
+  position: relative;
+  overflow: hidden;
+}
+/* Pixel-Silhouette: Schwarzwald-Huegel mit Tannen, eigene Grafik als Inline-SVG */
+.hero::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-2px; height:72px;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 72' preserveAspectRatio='none'%3E%3Cg fill='%231c2a47'%3E%3Cpath d='M0 72 L0 44 L16 44 L16 36 L32 36 L32 28 L48 28 L48 36 L64 36 L64 44 L88 44 L88 32 L104 32 L104 22 L120 22 L120 32 L136 32 L136 44 L160 44 L160 38 L176 38 L176 30 L192 30 L192 38 L208 38 L208 46 L232 46 L232 34 L248 34 L248 24 L264 24 L264 34 L280 34 L280 44 L320 44 L320 72 Z'/%3E%3C/g%3E%3Cg fill='%23264059'%3E%3Cpath d='M24 72 L24 56 L28 56 L28 50 L30 50 L30 46 L34 46 L34 50 L36 50 L36 56 L40 56 L40 72 Z'/%3E%3Cpath d='M92 72 L92 58 L96 58 L96 52 L98 52 L98 48 L102 48 L102 52 L104 52 L104 58 L108 58 L108 72 Z'/%3E%3Cpath d='M180 72 L180 56 L184 56 L184 50 L186 50 L186 46 L190 46 L190 50 L192 50 L192 56 L196 56 L196 72 Z'/%3E%3Cpath d='M262 72 L262 58 L266 58 L266 52 L268 52 L268 48 L272 48 L272 52 L274 52 L274 58 L278 58 L278 72 Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 640px 72px;
+  background-repeat: repeat-x;
+  background-position: bottom center;
+  image-rendering: pixelated;
+  opacity: 1;
+}
 .hero-inner{
   max-width: var(--max-breite); margin:0 auto;
   display:flex; gap:48px; align-items:center; flex-wrap:wrap;
