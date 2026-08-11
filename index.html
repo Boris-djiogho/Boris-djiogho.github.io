@@ -2,702 +2,176 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boris Morgan Djiogho Keou · Wirtschaftsinformatiker (M.Sc.)</title>
-<meta name="description" content="Boris Morgan Djiogho Keou, Wirtschaftsinformatiker (M.Sc.) aus Freiburg: Business-Analyse, Data Analytics, Softwareentwicklung und Operations Research. Die klassische Ansicht als Zeitungsausgabe.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Boris Djiogho – Portfolio-Spielwelt</title>
+<meta name="description" content="Das Portfolio von Boris Morgan Djiogho Keou als erkundbare Pixel-Welt: von Douala über Clausthal bis Freiburg.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<link rel="alternate" hreflang="de" href="index.html">
-<link rel="alternate" hreflang="en" href="portfolio-en.html">
-<link rel="alternate" hreflang="x-default" href="index.html">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23f3efe4'/><text x='50' y='76' font-size='70' text-anchor='middle' font-family='Georgia,serif' font-weight='bold' fill='%23191510'>B</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23f5b301'/><text x='50' y='72' font-size='60' text-anchor='middle' font-family='monospace' fill='%230f1420'>B</text></svg>">
+<style>
+:root{
+  --bg:#0f1420; --karte:#171e2e; --text:#e8ecf4; --gedimmt:#9aa5b8;
+  --akzent:#f5b301; --gruen:#4cd07d; --linie:#2a3550;
+  --pixel:"Press Start 2P", monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;}
+canvas{display:block;image-rendering:pixelated;}
+
+/* ===== Titel-Overlay ===== */
+#titel{
+  position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:26px;text-align:center;
+  background:rgba(10,14,24,0.35);transition:opacity .6s ease;
+}
+#titel.aus{opacity:0;pointer-events:none;}
+.titel-sub{font-family:var(--pixel);font-size:clamp(0.55rem,1.6vw,0.8rem);
+  color:#fff;text-shadow:2px 2px 0 rgba(0,0,0,0.8);line-height:1.9;}
+.titel-name{font-family:var(--pixel);font-size:clamp(1.6rem,6vw,3.2rem);color:#fff;
+  line-height:1.35;text-shadow:3px 3px 0 rgba(0,0,0,0.75), -2px -2px 0 rgba(0,0,0,0.4);}
+.titel-tag{font-family:var(--pixel);font-size:clamp(0.5rem,1.4vw,0.7rem);color:var(--akzent);
+  letter-spacing:0.2em;text-shadow:2px 2px 0 rgba(0,0,0,0.8);}
+#playBtn{
+  font-family:var(--pixel);font-size:clamp(0.9rem,2.4vw,1.3rem);
+  color:#fff;background:#e2574c;border:none;cursor:pointer;
+  padding:18px 54px 15px;box-shadow:0 6px 0 #9c352d, 4px 10px 0 rgba(0,0,0,0.45);
+  transition:transform .08s ease, box-shadow .08s ease;
+}
+#playBtn:hover{transform:translateY(3px);box-shadow:0 3px 0 #9c352d, 3px 6px 0 rgba(0,0,0,0.45);}
+.titel-escape{font-family:var(--pixel);font-size:0.6rem;color:#fff;
+  text-shadow:2px 2px 0 rgba(0,0,0,0.8);margin-top:8px;}
+.titel-escape a{color:var(--akzent);}
+#sprachBtn{
+  position:absolute;top:16px;right:16px;
+  font-family:var(--pixel);font-size:0.7rem;color:var(--text);
+  background:rgba(23,30,46,0.9);border:2px solid var(--linie);cursor:pointer;
+  padding:10px 14px 8px;box-shadow:3px 3px 0 rgba(0,0,0,0.5);
+}
+#sprachBtn:hover{border-color:var(--akzent);color:var(--akzent);}
+
+/* ===== HUD ===== */
+#hud{position:fixed;top:12px;left:12px;z-index:20;display:none;gap:10px;align-items:center;
+  font-family:var(--pixel);font-size:0.6rem;}
+#hud .hud-box{background:rgba(15,20,32,0.92);border:2px solid var(--akzent);
+  padding:10px 14px 8px;color:var(--akzent);font-size:0.68rem;
+  box-shadow:3px 3px 0 rgba(0,0,0,0.5);}
+#hud .hud-box.fertig{color:#141002;background:var(--akzent);
+  animation:pulsieren 1.1s ease-in-out infinite;}
+@keyframes pulsieren{0%,100%{transform:scale(1);}50%{transform:scale(1.07);}}
+#hilfe{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:20;display:none;
+  font-family:var(--pixel);font-size:0.55rem;color:#fff;text-shadow:2px 2px 0 rgba(0,0,0,0.8);
+  background:rgba(15,20,32,0.6);padding:8px 14px 6px;border:2px solid var(--linie);}
+#klassischLink{position:fixed;top:12px;right:12px;z-index:20;display:none;
+  font-family:var(--pixel);font-size:0.55rem;color:var(--text);text-decoration:none;
+  background:rgba(15,20,32,0.85);border:2px solid var(--linie);padding:8px 12px 6px;}
+#klassischLink:hover{border-color:var(--akzent);color:var(--akzent);}
+#sprachBtnSpiel{position:fixed;top:50px;right:12px;z-index:20;display:none;
+  font-family:var(--pixel);font-size:0.55rem;color:var(--text);cursor:pointer;
+  background:rgba(15,20,32,0.85);border:2px solid var(--linie);padding:8px 12px 6px;}
+#sprachBtnSpiel:hover{border-color:var(--akzent);color:var(--akzent);}
+
+/* ===== Stations-Karte (Modal) ===== */
+#modal{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;
+  background:rgba(5,8,15,0.7);padding:18px;}
+#modal.an{display:flex;}
+.modal-karte{
+  background:var(--karte);border:3px solid var(--akzent);max-width:560px;width:100%;
+  max-height:82vh;overflow-y:auto;padding:26px 28px;box-shadow:8px 8px 0 rgba(0,0,0,0.5);
+}
+.modal-karte.gruen{border-color:var(--gruen);}
+.modal-ort{font-family:var(--pixel);font-size:0.55rem;color:var(--gedimmt);
+  text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;}
+.modal-karte h2{font-family:var(--pixel);font-size:0.95rem;line-height:1.7;
+  color:var(--akzent);margin-bottom:14px;}
+.modal-karte.gruen h2{color:var(--gruen);}
+.modal-karte p{color:var(--text);font-size:0.98rem;line-height:1.65;margin-bottom:12px;}
+.modal-karte a{color:var(--akzent);}
+.modal-schliessen{
+  font-family:var(--pixel);font-size:0.65rem;margin-top:8px;cursor:pointer;
+  background:var(--akzent);color:#141002;border:none;padding:12px 20px 10px;
+  box-shadow:4px 4px 0 rgba(0,0,0,0.5);
+}
+.modal-schliessen:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 rgba(0,0,0,0.5);}
+
+/* ===== NPC-Dialog (RPG-Textbox) ===== */
+#npcDialog{
+  position:fixed; left:50%; bottom:70px; transform:translateX(-50%) translateY(12px);
+  z-index:25; width:min(560px, calc(100vw - 32px));
+  background:rgba(15,20,32,0.96);
+  border:3px solid var(--akzent);
+  box-shadow:6px 6px 0 rgba(0,0,0,0.5);
+  padding:16px 20px 14px;
+  opacity:0; pointer-events:none;
+  transition:opacity .18s ease, transform .18s ease;
+}
+#npcDialog.an{ opacity:1; transform:translateX(-50%) translateY(0); }
+#npcName{
+  font-family:var(--pixel); font-size:0.62rem; color:var(--akzent);
+  text-transform:uppercase; letter-spacing:0.1em;
+  display:inline-block; margin-bottom:8px;
+  background:rgba(245,179,1,0.12); border:1px solid rgba(245,179,1,0.4);
+  padding:5px 10px 3px;
+}
+#npcText{ color:var(--text); font-size:0.98rem; line-height:1.55; }
+.npc-hinweis{
+  position:absolute; right:12px; bottom:8px;
+  font-family:var(--pixel); font-size:0.5rem; color:var(--gedimmt);
+  animation:blinken 1.2s steps(2) infinite;
+}
+@keyframes blinken{ 50%{ opacity:0.25; } }
+
+/* ===== Mobile D-Pad ===== */
+#dpad{position:fixed;bottom:18px;left:18px;z-index:20;display:none;
+  grid-template-columns:repeat(3,54px);grid-template-rows:repeat(3,54px);gap:4px;opacity:0.85;}
+#dpad button{font-family:var(--pixel);font-size:1rem;color:var(--text);
+  background:rgba(23,30,46,0.9);border:2px solid var(--linie);cursor:pointer;}
+#dpad button:active{background:var(--akzent);color:#141002;}
+@media (pointer:coarse){ #dpad.an{display:grid;} #hilfe{display:none !important;} }
+</style>
 </head>
 <body>
 
-<div id="intro" hidden>
-  <button id="introSkip" class="knopf">Intro überspringen →</button>
-  <div class="intro-blatt intro-unscharf" aria-hidden="true"></div>
-  <div class="intro-blatt intro-scharf" aria-hidden="true">
-    <div class="intro-wanted etikett">Gesucht<b>Boris Djiogho</b></div>
-  </div>
-  <div class="intro-lupe" aria-hidden="true"></div>
-  <p class="intro-hinweis etikett">Nimm die Lupe · finde den Gesuchten</p>
-  <div class="intro-stempel">Identifiziert</div>
+<canvas id="spiel"></canvas>
+
+<div id="titel">
+  <button id="sprachBtn" title="Sprache wechseln / switch language">EN</button>
+  <p class="titel-sub" id="titelSub">Wirtschaftsinformatik · KI · Operations Research<br>Portfolio</p>
+  <h1 class="titel-name">BORIS<br>DJIOGHO</h1>
+  <p class="titel-tag" id="titelTag">EINE REISE VON DOUALA NACH FREIBURG</p>
+  <button id="playBtn">PLAY</button>
+  <p class="titel-escape" id="titelEscape">Keine Zeit zu erkunden? <a href="portfolio-de.html">Klassisches Portfolio →</a></p>
 </div>
-<script>
-(function(){
-  var i = document.getElementById("intro");
-  try{
-    if(!sessionStorage.getItem("bd-intro") &&
-       !window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-      sessionStorage.setItem("bd-intro", "1");
-      i.hidden = false;
-      document.documentElement.style.overflow = "hidden";
-    }
-  }catch(e){}
-})();
-</script>
 
-<header class="zeitungskopf">
-  <div class="spalte-inhalt">
-    <div class="kopf-leiste etikett">
-      <span>Freiburg im Breisgau</span>
-      <span>The Investigation Edition</span>
-      <span>Gegr. 2026</span>
-    </div>
-    <div class="masthead">
-      <h1>Boris Djiogho</h1>
-      <p class="masthead-unter etikett">Die Personalakte eines Wirtschaftsinformatikers</p>
-      <div class="datum-zeile etikett">
-        <span id="datum">2026</span>
-        <span>·</span>
-        <span>Vol. I</span>
-        <span>·</span>
-        <span>Ausgewählte Arbeiten &amp; Notizen</span>
-        <span>·</span>
-        <span>Preis: ein freundliches Hallo</span>
-      </div>
-    </div>
+<div id="hud">
+  <div class="hud-box" id="zaehler">STATIONEN 0 / 21</div>
+</div>
+<a id="klassischLink" href="index.html">Klassische Ansicht</a>
+<button id="sprachBtnSpiel" title="Sprache wechseln / switch language">EN</button>
+<div id="hilfe">Pfeiltasten / WASD: laufen · Stationen betreten öffnet die Karte · ENTER schließt · Sammle alle Stationen!</div>
+
+<div id="dpad">
+  <span></span><button data-r="up">▲</button><span></span>
+  <button data-r="left">◀</button><span></span><button data-r="right">▶</button>
+  <span></span><button data-r="down">▼</button><span></span>
+</div>
+
+<div id="npcDialog">
+  <span id="npcName"></span>
+  <p id="npcText"></p>
+  <span class="npc-hinweis">[ENTER]</span>
+</div>
+
+<div id="modal">
+  <div class="modal-karte" id="modalKarte">
+    <p class="modal-ort" id="modalOrt"></p>
+    <h2 id="modalTitel"></h2>
+    <div id="modalText"></div>
+    <button class="modal-schliessen" id="modalZu">WEITER [ENTER]</button>
   </div>
-</header>
+</div>
 
-<nav class="nav">
-  <div class="nav-innen">
-    <a class="nav-name" href="#top">Boris Djiogho</a>
-    <div class="nav-links">
-      <a href="#work">Arbeiten</a>
-      <a href="#stack">Stack</a>
-      <a href="#engagement">Engagement</a>
-      <a href="#career">Werdegang</a>
-      <a href="#contact">Kontakt</a>
-      <a href="spielwelt.html">Spiel</a>
-      <a href="portfolio-en.html" hreflang="en" title="English edition">EN</a>
-      <a class="knopf-voll" href="#contact">Jetzt einstellen</a>
-    </div>
-  </div>
-</nav>
-
-<main id="top">
-
-<!-- ===== Titelseite ===== -->
-<section class="titelseite">
-  <div class="spalte-inhalt">
-    <div class="etikett-zeile">
-      <span class="etikett etikett-rot">Akte Nr. 26 · Befunde veröffentlicht</span>
-      <span class="etikett">Ablage: laufende Ermittlungen</span>
-    </div>
-    <div class="titel-raster">
-      <div>
-        <h2 class="schlagzeile">Ein Wirtschafts&shy;informatiker in Freiburg, der zwischen <em>Fachbereich und Technik</em> übersetzt.</h2>
-        <p class="vorspann">Drei Abschlüsse aktenkundig: Boris Djiogho baut KI-Pipelines,
-          Optimierungsmodelle und Geschäftsanwendungen, zuletzt fast vier Jahre im
-          Bereich Digital Solutions bei Forvis Mazars.</p>
-        <p class="unterschrift etikett">Von der Redaktion · Berichtet aus Freiburg, zwischen Workshop und Code</p>
-        <div class="knopf-reihe">
-          <a class="knopf knopf-haupt" href="#work">Zu den Arbeiten →</a>
-          <a class="knopf" href="#contact">Kontakt aufnehmen</a>
-        </div>
-      </div>
-      <div class="titel-text">
-        <figure class="portraet-rahmen">
-          <div class="portraet-buehne">
-            <img src="assets/boris.jpg" alt="Porträt von Boris Morgan Djiogho Keou">
-            <img class="portraet-farbe" src="assets/boris.jpg" alt="" aria-hidden="true">
-          </div>
-          <figcaption class="etikett">Im Bild: der Gesuchte, bereit für den nächsten Fall.</figcaption>
-        </figure>
-        <p class="initial">Ihn interessiert der ganze Weg: von der ersten Frage im Workshop
-          mit dem Fachbereich bis zum Modell, das die Antwort liefert. Die Spur führt von einer
-          Apotheke in Douala über ein Biologie-Studium zur Informatik, mit einem M.Sc.
-          Wirtschaftsinformatik und parallelem B.Sc. Digitales Management an der TU
-          Clausthal.</p>
-        <p>Wenn ein Fall es verlangt, greift er zu Python und SQL, zu Gurobi, wenn etwas
-          optimal sein muss, und zu LLM-Pipelines, wenn Dokumente sich nicht von selbst
-          lesen. Das Thema Gesundheit taucht in seiner Akte immer wieder auf: Workflows
-          und Nutzungsdaten-Analyse im Forschungsprojekt Pflegebrille, eine KI-Lernplattform
-          für Pflegeschüler:innen beim HealthHack 2026.</p>
-      </div>
-    </div>
-    <div class="info-leiste">
-      <div class="info-kasten"><strong>Nr. 26</strong><span class="etikett">Ausgabe · Erstdruck</span></div>
-      <div class="info-kasten"><strong>3 Sprachen</strong><span class="etikett">Französisch · Deutsch · Englisch</span></div>
-      <div class="info-kasten"><strong>3 Abschlüsse</strong><span class="etikett">Zwei davon parallel</span></div>
-      <div class="info-kasten"><strong>3 Kontinente</strong><span class="etikett">Verbreitung: Douala bis Freiburg</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Beweisstuecke ===== -->
-<section class="sektion" id="work">
-  <div class="spalte-inhalt">
-    <div class="etikett-zeile">
-      <span class="etikett etikett-rot">Die Beweisstücke</span>
-      <span class="etikett">Beweisstücke A bis H · Aus den Fallakten</span>
-    </div>
-    <h2 class="sektion-titel">Ausgewählte Arbeiten</h2>
-
-    <div class="exponat-a">
-      <div class="beweis-bild">
-        <img src="assets/spielwelt-szene.png" alt="Screenshot der Pixel-Spielwelt: Gebäude, Bäume, NPCs und ein Ententeich">
-        <span class="stempel-bestaetigt">Bestätigt</span>
-        <span class="stempel-oval">Beweisstück A</span>
-        <span class="bild-quelle">sichergestellt aus spielwelt.html</span>
-      </div>
-      <div>
-        <p class="etikett etikett-rot">Beweisstück A · Aushängeschild</p>
-        <h3 class="projekt-name">Die Spielwelt &amp; ihre Engine</h3>
-        <p>Dieses Portfolio existiert zweimal. Die zweite Tür führt in eine begehbare
-          Pixel-Welt, deren JavaScript-Canvas-Engine der Gesuchte komplett selbst
-          geschrieben hat: Game Loop, Kollisionserkennung, Tilemap-Rendering,
-          Tiefensortierung und ein Dialogsystem, ganz ohne Framework. Einundzwanzig
-          zweisprachige Stationen erzählen die ganze Akte nach; die Sprites stammen aus
-          Anokolisas Pixel-Crawler-Pack.</p>
-        <div class="tags"><span>JavaScript</span><span>HTML5 Canvas</span><span>Game Loop</span><span>OOP</span></div>
-        <div class="akte-zeile">
-          <span class="etikett">2026 · laufend · Nebenprojekt</span>
-          <a class="akte-link" href="spielwelt.html">Welt betreten →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="exponat-raster">
-      <article class="exponat">
-        <p class="etikett etikett-rot">Beweisstück B · KI + CAD</p>
-        <h3>LV2CAD</h3>
-        <div class="beweis-bild klein">
-          <img class="glatt" src="assets/projekte/lv2cad.png" alt="LV2CAD-Ergebnisansicht: erkannte Bauelemente und 2D-CAD-Layout">
-          <span class="stempel-bestaetigt">Bestätigt</span>
-          <span class="stempel-oval">Beweisstück B</span>
-          <span class="bild-quelle">sichergestellt aus dem lokalen Build</span>
-        </div>
-        <p>Eine KI liest Parameter aus Bau-Leistungsverzeichnissen; eine deterministische
-          Pipeline erzeugt daraus fertigungsreife CAD-Dateien.</p>
-        <div class="tags"><span>Python</span><span>Mistral</span><span>React</span><span>FastAPI</span></div>
-        <div class="akte-zeile">
-          <span class="etikett">Eigenes Projekt</span>
-          <a class="akte-link" href="https://github.com/Boris-djiogho/lv2cad">Fallakte öffnen →</a>
-        </div>
-      </article>
-
-      <article class="exponat">
-        <p class="etikett etikett-rot">Beweisstück C · Gesundheit + KI</p>
-        <h3>Kurare</h3>
-        <div class="beweis-bild klein">
-          <img class="glatt" src="assets/projekte/kurare.png" alt="Skizze: Voice-to-Voice-Übung mit Wellenformen und Fortschrittsbalken">
-          <span class="stempel-bestaetigt">Bestätigt</span>
-          <span class="stempel-oval">Beweisstück C</span>
-          <span class="bild-quelle">Fallskizze</span>
-        </div>
-        <p>KI-Lernplattform für internationale Pflegeschüler:innen, entstanden beim
-          HealthHack 2026: Sprachpraxis im Voice-to-Voice-Dialog, Einstufungstest,
-          KPI-Dashboard für Lehrkräfte.</p>
-        <div class="tags"><span>Flask</span><span>LLM</span><span>Qdrant</span></div>
-        <div class="akte-zeile">
-          <span class="etikett">Hackathon 2026</span>
-          <a class="akte-link" href="https://github.com/Boris-djiogho/kurare-healthhack-2026">Fallakte öffnen →</a>
-        </div>
-      </article>
-
-      <article class="exponat">
-        <p class="etikett etikett-rot">Beweisstück D · Abschlussarbeit</p>
-        <h3>E-Fahrzeug-Tourenplanung</h3>
-        <div class="beweis-bild klein">
-          <img class="glatt" src="assets/projekte/evrp.png" alt="Solver-Ausgabe: zwei Elektrofahrzeug-Routen mit Ladestopps" style="object-position: center 30%">
-          <span class="stempel-bestaetigt">Bestätigt</span>
-          <span class="stempel-oval">Beweisstück D</span>
-          <span class="bild-quelle">sichergestellt aus dem Solver</span>
-        </div>
-        <p>Masterarbeit: ein MILP-Modell, exakt gelöst mit Gurobi, plus eine eigene
-          ALNS-Metaheuristik für das EVRP mit gleichzeitiger Auslieferung und Abholung.</p>
-        <div class="tags"><span>Python</span><span>Gurobi</span><span>ALNS</span></div>
-        <div class="akte-zeile">
-          <span class="etikett">Thesis 2026</span>
-          <a class="akte-link" href="https://github.com/Boris-djiogho/evrp-spd-thesis">Fallakte öffnen →</a>
-        </div>
-      </article>
-
-      <article class="exponat">
-        <p class="etikett etikett-rot">Beweisstück E · Big Data</p>
-        <h3>LLM-Datenpipeline</h3>
-        <div class="beweis-bild klein">
-          <img class="glatt" src="assets/projekte/llm-pipeline.png" alt="Skizze der Drei-Ebenen-Architektur mit LLM-Vorverarbeitung">
-          <span class="stempel-bestaetigt">Bestätigt</span>
-          <span class="stempel-oval">Beweisstück E</span>
-          <span class="bild-quelle">Fallskizze</span>
-        </div>
-        <p>Datenverarbeitungspipeline mit LLM-basierter Vorverarbeitung auf einer
-          modifizierten Drei-Ebenen-Architektur, ausgeliefert als Streamlit-Anwendung.</p>
-        <div class="tags"><span>Python</span><span>Streamlit</span><span>LLM</span></div>
-        <div class="akte-zeile">
-          <span class="etikett">Studienprojekt</span>
-          <a class="akte-link" href="https://github.com/Boris-djiogho/llm-data-pipeline">Fallakte öffnen →</a>
-        </div>
-      </article>
-
-      <article class="exponat">
-        <p class="etikett etikett-rot">Beweisstück F · Microservices</p>
-        <h3>Taxi-Simulation</h3>
-        <div class="beweis-bild klein">
-          <img class="glatt" src="assets/projekte/taxi.png" alt="Skizze: Taxiroute auf einem Straßenraster mit drei Services">
-          <span class="stempel-bestaetigt">Bestätigt</span>
-          <span class="stempel-oval">Beweisstück F</span>
-          <span class="bild-quelle">Fallskizze</span>
-        </div>
-        <p>Spring-Boot-Microservices mit Eureka Service Discovery: GraphHopper-Routing
-          auf echten OSM-Daten, animierte Fahrten auf einer Leaflet-Karte.</p>
-        <div class="tags"><span>Java</span><span>Spring Boot</span><span>Leaflet</span></div>
-        <div class="akte-zeile">
-          <span class="etikett">Studienprojekt</span>
-          <a class="akte-link" href="https://github.com/Boris-djiogho/taxi-microservices">Fallakte öffnen →</a>
-        </div>
-      </article>
-
-      <article class="exponat">
-        <p class="etikett etikett-rot">Beweisstück G · Heuristiken</p>
-        <h3>PC-TSP-Heuristiken</h3>
-        <div class="beweis-bild klein">
-          <img class="glatt" src="assets/projekte/pctsp.png" alt="Skizze einer Prize-Collecting-Tour: besuchte Preise und ausgelassene Strafen">
-          <span class="stempel-bestaetigt">Bestätigt</span>
-          <span class="stempel-oval">Beweisstück G</span>
-          <span class="bild-quelle">Fallskizze</span>
-        </div>
-        <p>Seminararbeit: theoretische Analyse des Prize-Collecting TSP und eine
-          Multi-Start-Hill-Climbing-Heuristik in Python.</p>
-        <div class="tags"><span>Python</span><span>Jupyter</span><span>Heuristiken</span></div>
-        <div class="akte-zeile">
-          <span class="etikett">Seminararbeit</span>
-          <a class="akte-link" href="https://github.com/Boris-djiogho/pctsp-heuristics">Fallakte öffnen →</a>
-        </div>
-      </article>
-    </div>
-
-    <div class="auch-akte">
-      <span class="etikett etikett-rot">Beweisstück H · Ebenfalls aktenkundig</span>
-      <p><b>Job-Shop-Scheduling:</b> mathematische Modellierung und exakte Lösung des
-        klassischen JSSP mit FICO Xpress, mit Analyse von Lösungsgüte und Rechenzeiten.</p>
-      <a class="akte-link" href="https://github.com/Boris-djiogho/jssp-fico-xpress">Fallakte öffnen →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Laborbericht ===== -->
-<section class="sektion" id="stack">
-  <div class="spalte-inhalt">
-    <div class="etikett-zeile">
-      <span class="etikett etikett-rot">Forensik</span>
-      <span class="etikett">Am Gesuchten nachgewiesene Substanzen, Stand dieser Ausgabe</span>
-    </div>
-    <h2 class="sektion-titel">Der Laborbericht</h2>
-    <div class="tabellen-rolle">
-    <table class="labor-tabelle">
-      <thead>
-        <tr><th>Substanz</th><th>Code</th><th>Nachgewiesen</th><th style="text-align:right">Befund</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Python · Pandas · NumPy</td><td class="code">PY</td><td>Fast täglich</td><td class="fund"><span class="befund">Hauptwerkzeug</span></td></tr>
-        <tr><td>SQL</td><td class="code">SQL</td><td>Fast täglich</td><td class="fund"><span class="befund">Hauptwerkzeug</span></td></tr>
-        <tr><td>LLM-Anwendungen</td><td class="code">KI</td><td>In den jüngsten Projekten</td><td class="fund"><span class="befund">Hauptwerkzeug</span></td></tr>
-        <tr><td>Low-Code · Betty Blocks</td><td class="code">LC</td><td>Fast vier Jahre im Beruf</td><td class="fund"><span class="befund">Hauptwerkzeug</span></td></tr>
-        <tr><td>Gurobi · FICO Xpress</td><td class="code">MILP</td><td>Thesis und Studienprojekte</td><td class="fund"><span class="befund grau">Sicher im Umgang</span></td></tr>
-        <tr><td>Java · Spring Boot</td><td class="code">JVM</td><td>In Projekten</td><td class="fund"><span class="befund grau">Sicher im Umgang</span></td></tr>
-        <tr><td>JavaScript · React</td><td class="code">JS</td><td>In Projekten, eine Spiel-Engine</td><td class="fund"><span class="befund grau">Sicher im Umgang</span></td></tr>
-        <tr><td>R · Tableau · SPSS</td><td class="code">DATA</td><td>Analysen und Dashboards</td><td class="fund"><span class="befund grau">Sicher im Umgang</span></td></tr>
-        <tr><td>Machine Learning</td><td class="code">ML</td><td>Studium und Kurare</td><td class="fund"><span class="befund grau">Sicher im Umgang</span></td></tr>
-        <tr><td>Git · VS Code</td><td class="code">DEV</td><td>In jeder Fallakte</td><td class="fund"><span class="befund grau">Sicher im Umgang</span></td></tr>
-        <tr><td>Microsoft 365 · Power Automate · Copilot Studio</td><td class="code">M365</td><td>Bei Forvis Mazars</td><td class="fund"><span class="befund grau">Sicher im Umgang</span></td></tr>
-        <tr><td>SAP</td><td class="code">ERP</td><td>Grundkenntnisse aktenkundig</td><td class="fund"><span class="befund grau">Spuren</span></td></tr>
-        <tr><td>Docker</td><td class="code">INFRA</td><td>Zurzeit im Labor</td><td class="fund"><span class="befund grau">In Ausbildung</span></td></tr>
-        <tr><td>Kotlin</td><td class="code">JVM</td><td>Zurzeit im Labor</td><td class="fund"><span class="befund grau">In Ausbildung</span></td></tr>
-        <tr><td>Spieleentwicklung</td><td class="code">GAME</td><td>Eine Engine ausgeliefert, weitere Loops im Studium</td><td class="fund"><span class="befund grau">In Ausbildung</span></td></tr>
-      </tbody>
-    </table>
-    </div>
-    <p class="labor-fussnote">Alle bestätigten Substanzen wurden in Produktionscode,
-      Seminararbeiten und Dashboards nachgewiesen; die Ausbildungsproben reifen noch.
-      Proben auf <a href="https://github.com/Boris-djiogho">GitHub</a>.</p>
-
-    <div class="etikett-zeile" id="engagement" style="margin-top: 46px; scroll-margin-top: 70px;">
-      <span class="etikett etikett-rot">Leumund</span>
-      <span class="etikett">Soziale Kompetenzen, jede mit Beleg in der Akte</span>
-    </div>
-    <h2 class="sektion-titel">Die Zeugenaussagen</h2>
-    <div class="hauptbuch">
-      <div class="hauptbuch-zeile">
-        <span class="zeit">Führungskompetenz</span>
-        <h3>Vereinspräsident seit Mai 2022<span>Afrikanischer Kulturverein Clausthal</span></h3>
-        <p>Verantwortet Budgetplanung, Sponsorenakquise und Veranstaltungen, vom
-          interkulturellen Fest bis zum kamerunischen Abend im Mokele Mbembe.</p>
-      </div>
-      <div class="hauptbuch-zeile">
-        <span class="zeit">Teamfähigkeit</span>
-        <h3>Kurare, HealthHack 2026<span>Interdisziplinäres Hackathon-Team</span></h3>
-        <p>In einem Wochenende vom Konzept zur Demo, gemeinsam mit Leuten aus Pflege,
-          Design und Technik.</p>
-      </div>
-      <div class="hauptbuch-zeile">
-        <span class="zeit">Kommunikation</span>
-        <h3>Citizen-Developer-Coaching<span>Forvis Mazars · und davor: Kindergarten, auf Deutsch</span></h3>
-        <p>Hat Fachanwender zu Citizen Developern ausgebildet. Die härteste
-          Kommunikationsschule davor: ein Berliner Kindergarten, in seiner dritten
-          Sprache.</p>
-      </div>
-      <div class="hauptbuch-zeile">
-        <span class="zeit">Mentoring</span>
-        <h3>Bildungsbeauftragter seit April 2026<span>Clausthaler Studenten aus Kamerun (CSK)</span></h3>
-        <p>Studienberatung und Betreuung für Studierende, die denselben Weg gehen wie er
-          damals.</p>
-      </div>
-      <div class="hauptbuch-zeile">
-        <span class="zeit">Gremienarbeit</span>
-        <h3>Fachschaftsrat &amp; Studierendenparlament seit März 2023<span>TU Clausthal</span></h3>
-        <p>Vertritt studentische Interessen und verhandelt in Hochschulgremien.</p>
-      </div>
-      <div class="hauptbuch-zeile">
-        <span class="zeit">Interkulturalität</span>
-        <h3>Drei Kontinente, vier Zuhause<span>Douala · Berlin · Chengdu · Freiburg</span></h3>
-        <p>Arbeitet auf Französisch, Deutsch und Englisch; Sommerschule an der
-          Sichuan-Universität in China.</p>
-      </div>
-    </div>
-    <p class="labor-fussnote">Referenzen zu allen Aussagen auf
-      <a href="https://www.linkedin.com/in/boris-morgan-djiogho-9a6396157/">LinkedIn</a>
-      oder auf Anfrage.</p>
-  </div>
-</section>
-
-<!-- ===== Karriere-Hauptbuch ===== -->
-<section class="sektion" id="career">
-  <div class="spalte-inhalt">
-    <div class="etikett-zeile">
-      <span class="etikett etikett-rot">Bekannte Aufenthaltsorte</span>
-      <span class="etikett">Aktenkundige Bewegungen seit 2015</span>
-    </div>
-    <h2 class="sektion-titel">Das Karriere-Hauptbuch</h2>
-    <div class="hauptbuch">
-      <div class="hauptbuch-zeile">
-        <span class="zeit">Okt. 2022 bis Juli 2026</span>
-        <h3>Werkstudent, Digital Solutions<span>Forvis Mazars · Berlin und remote</span></h3>
-        <p>Fast täglich beobachtet: Geschäftsanwendungen auf der Low-Code-Plattform Betty
-          Blocks bauen, Anforderungen mit Fachbereichen erheben, Schnittstellen
-          spezifizieren und Fachanwender zu Citizen Developern ausbilden.</p>
-      </div>
-      <div class="hauptbuch-zeile">
-        <span class="zeit">Jan. 2021 bis Okt. 2022</span>
-        <h3>Wissenschaftliche Hilfskraft<span>Lehrstuhl Human-Centered Information Systems, TU Clausthal</span></h3>
-        <p>Im Projekt Pflegebrille (AR-Brillen für die Pflege): Mitarbeit an Workflows und
-          der nutzerfreundlichen Darstellung von Patienteninformationen, dazu eigenständige
-          Analyse der Nutzungsdaten aus Pflegeheimen in einem selbst konzipierten
-          Dashboard. Nebenbei Android-Apps für Seminare und Roboter-Experimente, mit
-          Roboterkommunikation über MQTT.</p>
-      </div>
-      <div class="hauptbuch-zeile">
-        <span class="zeit">Okt. 2020 bis Feb. 2021</span>
-        <h3>Praktikant, Online-Marketing<span>Unicorn Factory Media</span></h3>
-        <p>Ein kurzer Einsatz in Content und SEO: OnPage- und OffPage-Optimierung und
-          ein Gespür dafür, wie Sichtbarkeit entsteht.</p>
-      </div>
-      <div class="hauptbuch-zeile">
-        <span class="zeit">Sommer 2019</span>
-        <h3>Ferienarbeiter, Produktion<span>Daimler · Rastatt</span></h3>
-        <p>Erster aktenkundiger Auftritt in einer Produktionshalle. Zwei Monate am
-          Fließband, die gezeigt haben, was Prozessoptimierung in der Praxis bedeutet.</p>
-      </div>
-      <div class="hauptbuch-zeile">
-        <span class="zeit">Nov. 2017 bis Mai 2020</span>
-        <h3>Ehrenamt, Frühpädagogik<span>Ev. Kindergarten Gustav Adolf · Berlin</span></h3>
-        <p>Ehrenamtliche pädagogische Mitarbeit neben dem Deutschkurs: der erste Alltag
-          auf Deutsch und eine bleibende Lektion in Kommunikation.</p>
-      </div>
-      <div class="hauptbuch-zeile">
-        <span class="zeit">2015 bis 2017</span>
-        <h3>Apotheken-Assistent<span>Pharmacie du Marché · Douala</span></h3>
-        <p>Der erste Job, mitten im Viertel, neben Biologie-Studium und Deutschkurs. Die
-          Gesundheitsspur in dieser Akte beginnt hier.</p>
-      </div>
-    </div>
-
-    <div class="dreier-raster">
-      <div class="akten-kasten">
-        <p class="etikett etikett-rot">Die Studienakte</p>
-        <h3>Abschlüsse, Zertifikate &amp; Sprachen</h3>
-        <ul>
-          <li><b>M.Sc. Wirtschaftsinformatik</b>, TU Clausthal, 2023 bis 2026 · Thesis zur E-Fahrzeug-Tourenplanung</li>
-          <li><b>B.Sc. Digitales Management</b>, parallel abgeschlossen, 2023 bis 2026</li>
-          <li><b>B.Sc. Wirtschaftsinformatik</b>, TU Clausthal, 2018 bis 2023</li>
-          <li>Sommerprogramm, Sichuan-Universität, Chengdu, 2024</li>
-          <li>Google Data Analytics Certificate, 2021 · Analyze Data with R, 2022</li>
-          <li>Französisch (Muttersprache) · Deutsch (verhandlungssicher, gesamtes Studium auf Deutsch) · Englisch (verhandlungssicher, C1)</li>
-        </ul>
-      </div>
-      <div class="akten-kasten">
-        <p class="etikett etikett-rot">Aktenkundig</p>
-        <h3>Engagement</h3>
-        <ul>
-          <li><b>Präsident</b>, Afrikanischer Kulturverein Clausthal, seit Mai 2022</li>
-          <li><b>Beauftragter für pädagogische Angelegenheiten</b>, Clausthaler Studenten aus Kamerun (CSK), seit April 2026</li>
-          <li><b>Fachschaftsrat &amp; Studierendenparlament</b>, TU Clausthal, seit März 2023</li>
-          <li>Ehrenamt im Kindergarten, Berlin, 2017 bis 2020</li>
-        </ul>
-      </div>
-      <div class="akten-kasten">
-        <p class="etikett etikett-rot">Außer Dienst</p>
-        <h3>Die Freizeitakte</h3>
-        <ul>
-          <li>Joggen, Wandern und Radfahren</li>
-          <li>Fußball</li>
-          <li>Mit Freunden kochen, Spieleabende</li>
-          <li>Zuletzt gesehen: im Schwarzwald unterwegs</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="zweier-raster">
-      <div class="akten-kasten roter-faden" style="grid-column: 1 / -1;">
-        <p class="etikett etikett-rot">Leitartikel · Der rote Faden</p>
-        <h3>Nachhaltigkeit, vom E-Schrott zur E-Mobilität</h3>
-        <p>Ausrangierte Geräte aus Europa landen auf Müllkippen in Afrika, wo Kinder in
-          alten Elektrogeräten nach Metallen suchen, statt zur Schule zu gehen. Dieses Bild
-          hat beide Abschlussarbeiten des Gesuchten geprägt: eine quantitative Analyse der
-          Rückgabe von Elektroaltgeräten in Deutschland und die Tourenplanung für
-          Elektrofahrzeuge mit nichtlinearen Ladefunktionen, damit E-Logistik nicht nur
-          sauber ist, sondern auch effizient.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Briefe & Auftraege ===== -->
-<section class="sektion" id="contact">
-  <div class="spalte-inhalt">
-    <div class="etikett-zeile">
-      <span class="etikett etikett-rot">Hinweis einreichen</span>
-      <span class="etikett">Der Schreibtisch ist offen für ausgewählte Fälle · 2026</span>
-    </div>
-    <h2 class="sektion-titel">Briefe &amp; Aufträge</h2>
-    <div class="briefe-raster">
-      <form class="brief-formular" id="brief">
-        <h3>Schriftlich einreichen</h3>
-        <p>Eine Stelle im Kopf, ein Projekt oder einfach eine gute Frage: Schicken Sie es
-          durch, er meldet sich zurück.</p>
-        <div class="feld-reihe">
-          <div class="feld">
-            <label class="etikett" for="brief-name">Ihr Name</label>
-            <input id="brief-name" name="name" type="text" autocomplete="name" placeholder="Erika Musterfrau">
-          </div>
-          <div class="feld">
-            <label class="etikett" for="brief-mail">E-Mail</label>
-            <input id="brief-mail" name="email" type="email" autocomplete="email" placeholder="erika@firma.de">
-          </div>
-        </div>
-        <div class="feld">
-          <label class="etikett" for="brief-betreff">Betreff</label>
-          <input id="brief-betreff" name="subject" type="text" placeholder="Eine Stelle, ein Projekt, eine Frage...">
-        </div>
-        <div class="feld">
-          <label class="etikett" for="brief-text">Die Geschichte</label>
-          <textarea id="brief-text" name="story" placeholder="Erzählen Sie ihm, was Sie bauen."></textarea>
-        </div>
-        <button class="knopf knopf-haupt" type="submit">Brief absenden</button>
-        <p class="formular-hinweis">Öffnet Ihr eigenes Mailprogramm, hier wird nichts gespeichert.</p>
-      </form>
-      <div class="kontakt-kaesten">
-        <div>
-          <span class="etikett etikett-rot">Direkter Draht</span>
-          <p><a href="mailto:djioghomorgan@yahoo.com">djioghomorgan@yahoo.com</a><br>
-            Für Stellen, Aufträge und hin und wieder eine gute Frage:
-            <a href="https://www.linkedin.com/in/boris-morgan-djiogho-9a6396157/">LinkedIn</a> ·
-            <a href="https://github.com/Boris-djiogho">GitHub</a> ·
-            <a href="cv/Lebenslauf_Boris_Djiogho.pdf">Lebenslauf (PDF)</a></p>
-        </div>
-        <div>
-          <span class="etikett etikett-rot">Der Schreibtisch</span>
-          <p>Freiburg im Breisgau<br>MEZ · remote-erprobt seit den Forvis-Mazars-Jahren</p>
-        </div>
-        <div>
-          <span class="etikett etikett-rot">Gesucht wird</span>
-          <p>Eine Einstiegsstelle an der Schnittstelle von Business-Analyse, Daten &amp; KI
-            und Softwareentwicklung.</p>
-        </div>
-        <div>
-          <div class="sozial-reihe">
-            <a href="https://github.com/Boris-djiogho" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a>
-            <a href="https://www.linkedin.com/in/boris-morgan-djiogho-9a6396157/" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v1.5"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-            <a href="mailto:djioghomorgan@yahoo.com" aria-label="E-Mail" title="E-Mail"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="m22 6-10 7L2 6"/></svg></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer class="fuss">
-  <div class="fuss-innen">
-    <p class="fuss-name">Boris Djiogho</p>
-    <div class="fuss-raster">
-      <div>
-        <span class="etikett">Über dieses Blatt</span>
-        <p>Die klassische Akte von Boris Morgan Djiogho Keou, Wirtschaftsinformatiker in
-          Freiburg. Bevorzugt Fälle, in denen Fachbereich und Technik miteinander reden
-          müssen. Die zweite Tür ist eine <a href="spielwelt.html">Spielwelt</a> mit
-          eigener Engine.</p>
-      </div>
-      <div>
-        <span class="etikett">Rubriken</span>
-        <ul>
-          <li><a href="#work">Ausgewählte Arbeiten</a></li>
-          <li><a href="#stack">Der Laborbericht</a></li>
-          <li><a href="#engagement">Die Zeugenaussagen</a></li>
-          <li><a href="#career">Das Karriere-Hauptbuch</a></li>
-          <li><a href="#contact">Briefe</a></li>
-        </ul>
-      </div>
-      <div>
-        <span class="etikett">Andere Ausgaben</span>
-        <ul>
-          <li><a href="portfolio-en.html" hreflang="en">English edition</a></li>
-          <li><a href="spielwelt.html">Die Spielwelt</a></li>
-          <li><a href="cv/Lebenslauf_Boris_Djiogho.pdf">Lebenslauf (PDF)</a></li>
-        </ul>
-        <details>
-          <summary>Impressum</summary>
-          <p>Angaben gemäß § 5 DDG<br>
-            Boris Morgan Djiogho Keou · Berliner Allee 29b · 79110 Freiburg im Breisgau<br>
-            E-Mail: <a href="mailto:djioghomorgan@yahoo.com">djioghomorgan@yahoo.com</a></p>
-        </details>
-      </div>
-    </div>
-    <p class="fuss-stempel">Akte geschlossen</p>
-    <div class="fuss-recht">
-      <span>© 2026 Boris Morgan Djiogho Keou · Alle Fakten doppelt geprüft</span>
-      <span>Design inspiriert von <a href="https://www.roberttran.com.au" target="_blank" rel="noopener">roberttran.com.au</a> · Spielwelt inspiriert von <a href="https://peteroravec.com" target="_blank" rel="noopener">peteroravec.com</a> · Pixel-Art von <a href="https://anokolisa.itch.io" target="_blank" rel="noopener">Anokolisa</a></span>
-    </div>
-  </div>
-</footer>
-
-<script>
-(function(){
-  var datum = document.getElementById("datum");
-  try{
-    datum.textContent = new Date().toLocaleDateString("de-DE",
-      { weekday:"long", day:"numeric", month:"long", year:"numeric" }).toUpperCase();
-  }catch(e){}
-
-  document.getElementById("brief").addEventListener("submit", function(e){
-    e.preventDefault();
-    var f = e.target;
-    var betreff = f.subject.value || "Brief an den Schreibtisch";
-    var text = "Von: " + f.name.value + " <" + f.email.value + ">\n\n" + f.story.value;
-    f.querySelector(".formular-hinweis").classList.add("an");
-    window.location.href = "mailto:djioghomorgan@yahoo.com?subject=" +
-      encodeURIComponent(betreff) + "&body=" + encodeURIComponent(text);
-  });
-
-  /* ===== Farb-Lupe auf dem Porträt ===== */
-  var buehne = document.querySelector(".portraet-buehne");
-  if(buehne){
-    var farbe = buehne.querySelector(".portraet-farbe");
-    buehne.addEventListener("pointermove", function(e){
-      var r = buehne.getBoundingClientRect();
-      farbe.style.clipPath = "circle(56px at " + (e.clientX - r.left) + "px " + (e.clientY - r.top) + "px)";
-    });
-    buehne.addEventListener("pointerleave", function(){
-      farbe.style.clipPath = "circle(0px at 50% 50%)";
-    });
-  }
-
-  /* ===== Sequenzieller Seitenaufbau (startet erst nach dem Intro) ===== */
-  document.documentElement.classList.add("js-an");
-  var ziele = document.querySelectorAll(
-    ".titelseite .etikett-zeile, .schlagzeile, .vorspann, .unterschrift, .knopf-reihe, " +
-    ".portraet-rahmen, .titel-text p, .info-kasten, .sektion-titel, .exponat-a > *, " +
-    ".exponat, .auch-akte, .labor-tabelle tbody tr, .labor-fussnote, .hauptbuch-zeile, " +
-    ".akten-kasten, .briefe-raster > *");
-  var beobachter = ("IntersectionObserver" in window) ? new IntersectionObserver(function(eintraege){
-    eintraege.forEach(function(e){
-      if(!e.isIntersecting) return;
-      var el = e.target;
-      var geschwister = Array.prototype.filter.call(el.parentElement.children,
-        function(k){ return k.classList && k.classList.contains("aufbau"); });
-      var idx = geschwister.indexOf(el);
-      el.style.transitionDelay = Math.min(idx, 14) * 70 + "ms";
-      el.classList.add("da");
-      beobachter.unobserve(el);
-    });
-  }, { threshold: 0.06 }) : null;
-  ziele.forEach(function(el){ el.classList.add("aufbau"); });
-  var aufbauGestartet = false;
-  function starteAufbau(){
-    if(aufbauGestartet) return;
-    aufbauGestartet = true;
-    ziele.forEach(function(el){
-      if(beobachter) beobachter.observe(el); else el.classList.add("da");
-    });
-    setTimeout(function(){ ziele.forEach(function(el){ el.classList.add("da"); }); }, 8000);
-  }
-
-  /* ===== Intro: Lupe sucht den Gesuchten =====
-     Sichtbar gemacht wird es vom frühen Inline-Skript direkt nach dem Markup,
-     damit die Seite dahinter nie zuerst aufblitzt. */
-  var intro = document.getElementById("intro");
-  var introAktiv = !!(intro && !intro.hidden);
-  if(!introAktiv){ if(intro) intro.remove(); starteAufbau(); return; }
-
-  var saat = 26;
-  function zufall(){ saat = (saat * 16807) % 2147483647; return (saat - 1) / 2147483646; }
-  var spalten = "";
-  for(var s = 0; s < 5; s++){
-    spalten += '<div class="intro-spalte">';
-    for(var z = 0; z < 40; z++){
-      var dunkel = zufall() < 0.12 ? " dunkel" : "";
-      spalten += '<div class="intro-zeile' + dunkel + '" style="width:' +
-        Math.round(60 + zufall() * 40) + '%"></div>';
-    }
-    spalten += "</div>";
-  }
-  var unscharf = intro.querySelector(".intro-unscharf");
-  var scharf = intro.querySelector(".intro-scharf");
-  unscharf.innerHTML = spalten;
-  scharf.insertAdjacentHTML("afterbegin", spalten);
-  var wx = 38 + zufall() * 28, wy = 28 + zufall() * 34;
-  var wanted = intro.querySelector(".intro-wanted");
-  wanted.style.setProperty("--wx", wx + "%");
-  wanted.style.setProperty("--wy", wy + "%");
-
-  var lupe = intro.querySelector(".intro-lupe");
-  var stempel = intro.querySelector(".intro-stempel");
-  var fertig = false;
-  var startzeit = Date.now();
-
-  function beende(){
-    if(fertig) return;
-    fertig = true;
-    stempel.classList.add("da");
-    setTimeout(function(){
-      intro.classList.add("aus");
-      document.documentElement.style.overflow = "";
-      starteAufbau();
-      setTimeout(function(){ intro.remove(); }, 1200);
-    }, 1700);
-  }
-  function bewege(x, y){
-    if(fertig) return;
-    lupe.style.transform = "translate(" + x + "px," + y + "px)";
-    scharf.style.clipPath = "circle(85px at " + x + "px " + y + "px)";
-    var r = wanted.getBoundingClientRect();
-    var dx = x - (r.left + r.width / 2), dy = y - (r.top + r.height / 2);
-    if(Math.hypot(dx, dy) < 75 && Date.now() - startzeit > 700) beende();
-  }
-  intro.addEventListener("pointermove", function(e){ bewege(e.clientX, e.clientY); });
-  intro.addEventListener("pointerdown", function(e){ bewege(e.clientX, e.clientY); });
-  document.getElementById("introSkip").addEventListener("click", beende);
-  setTimeout(beende, 20000);
-  bewege(window.innerWidth / 2, window.innerHeight * 0.62);
-})();
-</script>
-
+<script src="game.js"></script>
 </body>
 </html>

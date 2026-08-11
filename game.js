@@ -17,9 +17,9 @@ const UI = {
   de:{
     sub:"Wirtschaftsinformatik · KI · Operations Research<br>Portfolio",
     tag:"EINE REISE VON DOUALA NACH FREIBURG",
-    escape:'Keine Zeit zu erkunden? <a href="index.html">Klassisches Portfolio →</a>',
+    escape:'Keine Zeit zu erkunden? <a href="portfolio-de.html">Klassisches Portfolio →</a>',
     hilfe:"Pfeiltasten / WASD: laufen · Stationen betreten öffnet die Karte · ENTER schließt · Grüne Marker = Engagement · Sammle alle Stationen!",
-    klassisch:"Klassische Ansicht", klassischHref:"index.html",
+    klassisch:"Klassische Ansicht", klassischHref:"portfolio-de.html",
     weiter:"WEITER [ENTER]",
     zaehler:(n,g)=>"STATIONEN "+n+" / "+g,
     fertig:(g)=>"ALLE "+g+" STATIONEN!",
@@ -30,7 +30,7 @@ const UI = {
       "<a href='https://www.linkedin.com/in/boris-morgan-djiogho-9a6396157/' target='_blank' rel='noopener'>LinkedIn</a><br>"+
       "<a href='https://github.com/Boris-djiogho' target='_blank' rel='noopener'>GitHub</a><br>"+
       "<a href='cv/Lebenslauf_Boris_Djiogho.pdf' target='_blank'>Lebenslauf (PDF)</a><br>"+
-      "<a href='index.html'>Zur klassischen Ansicht</a></p>",
+      "<a href='portfolio-de.html'>Zur klassischen Ansicht</a></p>",
     toggle:"EN",
   },
   en:{
