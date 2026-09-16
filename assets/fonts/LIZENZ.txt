@@ -1,0 +1,6 @@
+Schriften in diesem Ordner, alle unter der SIL Open Font License 1.1 (https://openfontlicense.org):
+- Press Start 2P, Copyright 2012 The Press Start 2P Project Authors (CodeMan38)
+- Playfair Display, Copyright 2017 The Playfair Display Project Authors (Claus Eggers Sørensen)
+- Lora, Copyright 2011 The Lora Project Authors (Cyreal)
+- IBM Plex Mono, Copyright 2017 IBM Corp.
+Die Dateien wurden von Google Fonts bezogen (latin und latin-ext) und werden hier selbst gehostet, damit beim Seitenaufruf keine Verbindung zu Google-Servern entsteht.

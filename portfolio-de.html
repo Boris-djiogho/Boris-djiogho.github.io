@@ -5,14 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boris Morgan Djiogho Keou · Wirtschaftsinformatiker (M.Sc.)</title>
 <meta name="description" content="Boris Morgan Djiogho Keou, Wirtschaftsinformatiker (M.Sc.) aus Freiburg: Business-Analyse, Data Analytics, Softwareentwicklung und Operations Research. Die klassische Ansicht als Zeitungsausgabe.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://boris-djiogho.github.io/portfolio-de.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://boris-djiogho.github.io/portfolio-de.html">
+<meta property="og:title" content="Boris Morgan Djiogho Keou · Wirtschaftsinformatiker (M.Sc.)">
+<meta property="og:description" content="Boris Morgan Djiogho Keou, Wirtschaftsinformatiker (M.Sc.) aus Freiburg: Business-Analyse, Data Analytics, Softwareentwicklung und Operations Research. Die klassische Ansicht als Zeitungsausgabe.">
+<meta property="og:image" content="https://boris-djiogho.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="de_DE">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Boris Morgan Djiogho Keou · Wirtschaftsinformatiker (M.Sc.)">
+<meta name="twitter:description" content="Boris Morgan Djiogho Keou, Wirtschaftsinformatiker (M.Sc.) aus Freiburg: Business-Analyse, Data Analytics, Softwareentwicklung und Operations Research. Die klassische Ansicht als Zeitungsausgabe.">
+<meta name="twitter:image" content="https://boris-djiogho.github.io/assets/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Boris Morgan Djiogho Keou",
+  "alternateName": "Boris Djiogho",
+  "jobTitle": "Wirtschaftsinformatiker (M.Sc.)",
+  "address": { "@type": "PostalAddress", "addressLocality": "Freiburg im Breisgau", "addressCountry": "DE" },
+  "url": "https://boris-djiogho.github.io/",
+  "sameAs": [
+    "https://www.linkedin.com/in/boris-morgan-djiogho-9a6396157/",
+    "https://github.com/Boris-djiogho"
+  ],
+  "knowsLanguage": ["fr", "de", "en"],
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "TU Clausthal" }
+}
+</script>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="style.css">
-<link rel="alternate" hreflang="de" href="portfolio-de.html">
-<link rel="alternate" hreflang="en" href="portfolio-en.html">
-<link rel="alternate" hreflang="x-default" href="index.html">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23f3efe4'/><text x='50' y='76' font-size='70' text-anchor='middle' font-family='Georgia,serif' font-weight='bold' fill='%23191510'>B</text></svg>">
+<link rel="alternate" hreflang="de" href="https://boris-djiogho.github.io/portfolio-de.html">
+<link rel="alternate" hreflang="en" href="https://boris-djiogho.github.io/portfolio-en.html">
+<link rel="alternate" hreflang="x-default" href="https://boris-djiogho.github.io/">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
 
@@ -30,7 +60,12 @@
 (function(){
   var i = document.getElementById("intro");
   try{
-    if(!sessionStorage.getItem("bd-intro") &&
+    /* Kein Intro bei ?direkt=1 (Link aus der Spielwelt), auf Touchgeräten,
+       bei reduzierter Bewegung oder wenn es in dieser Sitzung schon lief. */
+    var direkt = /[?&]direkt=1(?:&|$)/.test(window.location.search);
+    var touch = window.matchMedia("(pointer: coarse)").matches;
+    if(!direkt && !touch &&
+       !sessionStorage.getItem("bd-intro") &&
        !window.matchMedia("(prefers-reduced-motion: reduce)").matches){
       sessionStorage.setItem("bd-intro", "1");
       i.hidden = false;
@@ -55,7 +90,7 @@
         <span>·</span>
         <span>Vol. I</span>
         <span>·</span>
-        <span>Ausgewählte Arbeiten &amp; Notizen</span>
+        <span>Ausgewählte Arbeiten und Notizen</span>
         <span>·</span>
         <span>Preis: ein freundliches Hallo</span>
       </div>
@@ -71,10 +106,9 @@
       <a href="#stack">Stack</a>
       <a href="#engagement">Engagement</a>
       <a href="#career">Werdegang</a>
-      <a href="#contact">Kontakt</a>
-      <a href="index.html">Spiel</a>
-      <a href="portfolio-en.html" hreflang="en" title="English edition">EN</a>
-      <a class="knopf-voll" href="#contact">Jetzt einstellen</a>
+      <a href="index.html?lang=de">Spiel</a>
+      <a href="portfolio-en.html?direkt=1" hreflang="en" title="English edition">EN</a>
+      <a class="knopf-voll" href="#contact">Kontakt</a>
     </div>
   </div>
 </nav>
@@ -147,7 +181,7 @@
       </div>
       <div>
         <p class="etikett etikett-rot">Beweisstück A · Aushängeschild</p>
-        <h3 class="projekt-name">Die Spielwelt &amp; ihre Engine</h3>
+        <h3 class="projekt-name">Die Spielwelt und ihre Engine</h3>
         <p>Dieses Portfolio existiert zweimal, und die Haupttür führt in eine begehbare
           Pixel-Welt, deren JavaScript-Canvas-Engine der Gesuchte komplett selbst
           geschrieben hat: Game Loop, Kollisionserkennung, Tilemap-Rendering,
@@ -157,7 +191,7 @@
         <div class="tags"><span>JavaScript</span><span>HTML5 Canvas</span><span>Game Loop</span><span>OOP</span></div>
         <div class="akte-zeile">
           <span class="etikett">2026 · laufend · Nebenprojekt</span>
-          <a class="akte-link" href="index.html">Welt betreten →</a>
+          <a class="akte-link" href="index.html?lang=de">Welt betreten →</a>
         </div>
       </div>
     </div>
@@ -177,7 +211,7 @@
         <div class="tags"><span>Python</span><span>Mistral</span><span>React</span><span>FastAPI</span></div>
         <div class="akte-zeile">
           <span class="etikett">Eigenes Projekt</span>
-          <a class="akte-link" href="https://github.com/Boris-djiogho/lv2cad">Fallakte öffnen →</a>
+          <a class="akte-link" href="https://github.com/Boris-djiogho/lv2cad">Projekt auf GitHub →</a>
         </div>
       </article>
 
@@ -196,7 +230,7 @@
         <div class="tags"><span>Flask</span><span>LLM</span><span>Qdrant</span></div>
         <div class="akte-zeile">
           <span class="etikett">Hackathon 2026</span>
-          <a class="akte-link" href="https://github.com/Boris-djiogho/kurare-healthhack-2026">Fallakte öffnen →</a>
+          <a class="akte-link" href="https://github.com/Boris-djiogho/kurare-healthhack-2026">Projekt auf GitHub →</a>
         </div>
       </article>
 
@@ -214,7 +248,7 @@
         <div class="tags"><span>Python</span><span>Gurobi</span><span>ALNS</span></div>
         <div class="akte-zeile">
           <span class="etikett">Thesis 2026</span>
-          <a class="akte-link" href="https://github.com/Boris-djiogho/evrp-spd-thesis">Fallakte öffnen →</a>
+          <a class="akte-link" href="https://github.com/Boris-djiogho/evrp-spd-thesis">Projekt auf GitHub →</a>
         </div>
       </article>
 
@@ -232,7 +266,7 @@
         <div class="tags"><span>Python</span><span>Streamlit</span><span>LLM</span></div>
         <div class="akte-zeile">
           <span class="etikett">Studienprojekt</span>
-          <a class="akte-link" href="https://github.com/Boris-djiogho/llm-data-pipeline">Fallakte öffnen →</a>
+          <a class="akte-link" href="https://github.com/Boris-djiogho/llm-data-pipeline">Projekt auf GitHub →</a>
         </div>
       </article>
 
@@ -250,7 +284,7 @@
         <div class="tags"><span>Java</span><span>Spring Boot</span><span>Leaflet</span></div>
         <div class="akte-zeile">
           <span class="etikett">Studienprojekt</span>
-          <a class="akte-link" href="https://github.com/Boris-djiogho/taxi-microservices">Fallakte öffnen →</a>
+          <a class="akte-link" href="https://github.com/Boris-djiogho/taxi-microservices">Projekt auf GitHub →</a>
         </div>
       </article>
 
@@ -268,7 +302,7 @@
         <div class="tags"><span>Python</span><span>Jupyter</span><span>Heuristiken</span></div>
         <div class="akte-zeile">
           <span class="etikett">Seminararbeit</span>
-          <a class="akte-link" href="https://github.com/Boris-djiogho/pctsp-heuristics">Fallakte öffnen →</a>
+          <a class="akte-link" href="https://github.com/Boris-djiogho/pctsp-heuristics">Projekt auf GitHub →</a>
         </div>
       </article>
     </div>
@@ -277,7 +311,7 @@
       <span class="etikett etikett-rot">Beweisstück H · Ebenfalls aktenkundig</span>
       <p><b>Job-Shop-Scheduling:</b> mathematische Modellierung und exakte Lösung des
         klassischen JSSP mit FICO Xpress, mit Analyse von Lösungsgüte und Rechenzeiten.</p>
-      <a class="akte-link" href="https://github.com/Boris-djiogho/jssp-fico-xpress">Fallakte öffnen →</a>
+      <a class="akte-link" href="https://github.com/Boris-djiogho/jssp-fico-xpress">Projekt auf GitHub →</a>
     </div>
   </div>
 </section>
@@ -319,10 +353,10 @@
       Proben auf <a href="https://github.com/Boris-djiogho">GitHub</a>.</p>
 
     <div class="etikett-zeile" id="engagement" style="margin-top: 46px; scroll-margin-top: 70px;">
-      <span class="etikett etikett-rot">Leumund</span>
-      <span class="etikett">Soziale Kompetenzen, jede mit Beleg in der Akte</span>
+      <span class="etikett etikett-rot">Die Zeugenaussagen · Leumund</span>
+      <span class="etikett">Jede Kompetenz mit Beleg in der Akte</span>
     </div>
-    <h2 class="sektion-titel">Die Zeugenaussagen</h2>
+    <h2 class="sektion-titel">Soziale Kompetenzen</h2>
     <div class="hauptbuch">
       <div class="hauptbuch-zeile">
         <span class="zeit">Führungskompetenz</span>
@@ -351,8 +385,9 @@
       </div>
       <div class="hauptbuch-zeile">
         <span class="zeit">Gremienarbeit</span>
-        <h3>Fachschaftsrat &amp; Studierendenparlament seit März 2023<span>TU Clausthal</span></h3>
-        <p>Vertritt studentische Interessen und verhandelt in Hochschulgremien.</p>
+        <h3>Fachschaftsrat und Studierendenparlament, März 2023 bis März 2027<span>TU Clausthal</span></h3>
+        <p>Vertritt studentische Interessen und verhandelt in Hochschulgremien, seit dem
+          Umzug nach Freiburg überwiegend online.</p>
       </div>
       <div class="hauptbuch-zeile">
         <span class="zeit">Interkulturalität</span>
@@ -421,7 +456,7 @@
     <div class="dreier-raster">
       <div class="akten-kasten">
         <p class="etikett etikett-rot">Die Studienakte</p>
-        <h3>Abschlüsse, Zertifikate &amp; Sprachen</h3>
+        <h3>Abschlüsse, Zertifikate und Sprachen</h3>
         <ul>
           <li><b>M.Sc. Wirtschaftsinformatik</b>, TU Clausthal, 2023 bis 2026 · Thesis zur E-Fahrzeug-Tourenplanung</li>
           <li><b>B.Sc. Digitales Management</b>, parallel abgeschlossen, 2023 bis 2026</li>
@@ -437,7 +472,7 @@
         <ul>
           <li><b>Präsident</b>, Afrikanischer Kulturverein Clausthal, seit Mai 2022</li>
           <li><b>Beauftragter für pädagogische Angelegenheiten</b>, Clausthaler Studenten aus Kamerun (CSK), seit April 2026</li>
-          <li><b>Fachschaftsrat &amp; Studierendenparlament</b>, TU Clausthal, seit März 2023</li>
+          <li><b>Fachschaftsrat und Studierendenparlament</b>, TU Clausthal, März 2023 bis März 2027</li>
           <li>Ehrenamt im Kindergarten, Berlin, 2017 bis 2020</li>
         </ul>
       </div>
@@ -475,12 +510,12 @@
       <span class="etikett etikett-rot">Hinweis einreichen</span>
       <span class="etikett">Der Schreibtisch ist offen für ausgewählte Fälle · 2026</span>
     </div>
-    <h2 class="sektion-titel">Briefe &amp; Aufträge</h2>
+    <h2 class="sektion-titel">Kontakt</h2>
     <div class="briefe-raster">
       <form class="brief-formular" id="brief">
-        <h3>Schriftlich einreichen</h3>
+        <h3>Schreiben Sie mir</h3>
         <p>Eine Stelle im Kopf, ein Projekt oder einfach eine gute Frage: Schicken Sie es
-          durch, er meldet sich zurück.</p>
+          durch, ich melde mich zurück.</p>
         <div class="feld-reihe">
           <div class="feld">
             <label class="etikett" for="brief-name">Ihr Name</label>
@@ -497,9 +532,9 @@
         </div>
         <div class="feld">
           <label class="etikett" for="brief-text">Die Geschichte</label>
-          <textarea id="brief-text" name="story" placeholder="Erzählen Sie ihm, was Sie bauen."></textarea>
+          <textarea id="brief-text" name="story" placeholder="Erzählen Sie mir, was Sie bauen."></textarea>
         </div>
-        <button class="knopf knopf-haupt" type="submit">Brief absenden</button>
+        <button class="knopf knopf-haupt" type="submit">E-Mail schreiben</button>
         <p class="formular-hinweis">Öffnet Ihr eigenes Mailprogramm, hier wird nichts gespeichert.</p>
       </form>
       <div class="kontakt-kaesten">
@@ -517,8 +552,10 @@
         </div>
         <div>
           <span class="etikett etikett-rot">Gesucht wird</span>
-          <p>Eine Einstiegsstelle an der Schnittstelle von Business-Analyse, Daten &amp; KI
-            und Softwareentwicklung.</p>
+          <p>Berufseinstieg an der Schnittstelle von KI, Daten und Geschäftsprozessen.<br>
+            <b>Verfügbar:</b> ab sofort<br>
+            <b>Standort:</b> Freiburg, hybrid oder remote<br>
+            <b>Sprachen:</b> FR (Muttersprache), DE, EN (C1)</p>
         </div>
         <div>
           <div class="sozial-reihe">
@@ -542,7 +579,7 @@
         <span class="etikett">Über dieses Blatt</span>
         <p>Die klassische Akte von Boris Morgan Djiogho Keou, Wirtschaftsinformatiker in
           Freiburg. Bevorzugt Fälle, in denen Fachbereich und Technik miteinander reden
-          müssen. Der Haupteingang ist eine <a href="index.html">Spielwelt</a> mit
+          müssen. Der Haupteingang ist eine <a href="index.html?lang=de">Spielwelt</a> mit
           eigener Engine.</p>
       </div>
       <div>
@@ -550,16 +587,16 @@
         <ul>
           <li><a href="#work">Ausgewählte Arbeiten</a></li>
           <li><a href="#stack">Der Laborbericht</a></li>
-          <li><a href="#engagement">Die Zeugenaussagen</a></li>
+          <li><a href="#engagement">Soziale Kompetenzen</a></li>
           <li><a href="#career">Das Karriere-Hauptbuch</a></li>
-          <li><a href="#contact">Briefe</a></li>
+          <li><a href="#contact">Kontakt</a></li>
         </ul>
       </div>
       <div>
         <span class="etikett">Andere Ausgaben</span>
         <ul>
-          <li><a href="portfolio-en.html" hreflang="en">English edition</a></li>
-          <li><a href="index.html">Die Spielwelt</a></li>
+          <li><a href="portfolio-en.html?direkt=1" hreflang="en">English edition</a></li>
+          <li><a href="index.html?lang=de">Die Spielwelt</a></li>
           <li><a href="cv/Lebenslauf_Boris_Djiogho.pdf">Lebenslauf (PDF)</a></li>
         </ul>
         <details>
@@ -567,6 +604,22 @@
           <p>Angaben gemäß § 5 DDG<br>
             Boris Morgan Djiogho Keou · Berliner Allee 29b · 79110 Freiburg im Breisgau<br>
             E-Mail: <a href="mailto:djioghomorgan@yahoo.com">djioghomorgan@yahoo.com</a></p>
+        </details>
+        <details>
+          <summary>Datenschutz</summary>
+          <p class="etikett">Stand: September 2026</p>
+          <p>Diese Website ist eine statische Seite und wird bei GitHub Pages (GitHub Inc., USA)
+            gehostet. Beim Aufruf verarbeitet GitHub technisch notwendige Verbindungsdaten
+            (IP-Adresse, Zeitpunkt, aufgerufene Datei) in Server-Logs; Rechtsgrundlage ist
+            Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und stabilen
+            Betrieb). Näheres in der
+            <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">Datenschutzerklärung von GitHub</a>.</p>
+          <p>Die Seite setzt keine Cookies, nutzt keine Analyse-Tools und lädt alle Schriften vom
+            eigenen Server. Im Browser werden lediglich lokale Einstellungen (Sprache,
+            Spielfortschritt, Intro gesehen) im localStorage bzw. sessionStorage gespeichert;
+            diese Daten werden nicht übertragen.</p>
+          <p>Bei Kontakt per E-Mail werden die übermittelten Daten ausschließlich zur Bearbeitung
+            der Anfrage verwendet.</p>
         </details>
       </div>
     </div>
@@ -589,7 +642,7 @@
   document.getElementById("brief").addEventListener("submit", function(e){
     e.preventDefault();
     var f = e.target;
-    var betreff = f.subject.value || "Brief an den Schreibtisch";
+    var betreff = f.subject.value || "Kontakt über die Website";
     var text = "Von: " + f.name.value + " <" + f.email.value + ">\n\n" + f.story.value;
     f.querySelector(".formular-hinweis").classList.add("an");
     window.location.href = "mailto:djioghomorgan@yahoo.com?subject=" +

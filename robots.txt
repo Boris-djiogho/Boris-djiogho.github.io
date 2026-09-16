@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://boris-djiogho.github.io/sitemap.xml

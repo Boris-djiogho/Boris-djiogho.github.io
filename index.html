@@ -2,176 +2,394 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Boris Djiogho – Portfolio-Spielwelt</title>
-<meta name="description" content="Das Portfolio von Boris Morgan Djiogho Keou als erkundbare Pixel-Welt: von Douala über Clausthal bis Freiburg.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23f5b301'/><text x='50' y='72' font-size='60' text-anchor='middle' font-family='monospace' fill='%230f1420'>B</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Boris Djiogho · Wirtschaftsinformatiker (M.Sc.) · Portfolio-Spielwelt</title>
+<meta name="description" content="Das Portfolio von Boris Morgan Djiogho Keou, Wirtschaftsinformatiker (M.Sc.) in Freiburg, als erkundbare Pixel-Welt: von Douala über Berlin und den Oberharz bis Freiburg. Projekte, Werdegang, Engagement und Kontakt.">
+<link rel="canonical" href="https://boris-djiogho.github.io/">
+<link rel="alternate" hreflang="de" href="https://boris-djiogho.github.io/portfolio-de.html">
+<link rel="alternate" hreflang="en" href="https://boris-djiogho.github.io/portfolio-en.html">
+<link rel="alternate" hreflang="x-default" href="https://boris-djiogho.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://boris-djiogho.github.io/">
+<meta property="og:title" content="Boris Djiogho · Wirtschaftsinformatiker (M.Sc.) · Portfolio-Spielwelt">
+<meta property="og:description" content="Portfolio als erkundbare Pixel-Welt: von Douala über Berlin und den Oberharz bis Freiburg. Projekte, Werdegang, Engagement und Kontakt.">
+<meta property="og:image" content="https://boris-djiogho.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="de_DE">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Boris Djiogho · Wirtschaftsinformatiker (M.Sc.) · Portfolio-Spielwelt">
+<meta name="twitter:description" content="Portfolio als erkundbare Pixel-Welt: von Douala über Berlin und den Oberharz bis Freiburg.">
+<meta name="twitter:image" content="https://boris-djiogho.github.io/assets/og.png">
+<meta name="theme-color" content="#0f1420">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/press-start-2p-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="preload" href="assets/spiel/atlas.png" as="image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Boris Morgan Djiogho Keou",
+  "alternateName": "Boris Djiogho",
+  "jobTitle": "Wirtschaftsinformatiker (M.Sc.)",
+  "url": "https://boris-djiogho.github.io/",
+  "image": "https://boris-djiogho.github.io/assets/boris.jpg",
+  "address": { "@type": "PostalAddress", "addressLocality": "Freiburg im Breisgau", "addressCountry": "DE" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "TU Clausthal" },
+  "knowsLanguage": ["fr", "de", "en"],
+  "sameAs": [
+    "https://www.linkedin.com/in/boris-morgan-djiogho-9a6396157/",
+    "https://github.com/Boris-djiogho"
+  ]
+}
+</script>
+<!-- Optionaler, cookieloser Besuchszähler (z. B. GoatCounter). Zum Aktivieren die Zeile einkommentieren
+     und den eigenen Code eintragen; ohne diese Variable wird nichts gesendet.
+<script>window.BD_ZAEHLER = "https://DEIN-CODE.goatcounter.com/count";</script> -->
 <style>
 :root{
   --bg:#0f1420; --karte:#171e2e; --text:#e8ecf4; --gedimmt:#9aa5b8;
-  --akzent:#f5b301; --gruen:#4cd07d; --linie:#2a3550;
+  --akzent:#f5b301; --gruen:#4cd07d; --blau:#4fb3ff; --rot:#e2574c; --linie:#2a3550;
   --pixel:"Press Start 2P", monospace;
+  --system:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --oben:env(safe-area-inset-top,0px); --unten:env(safe-area-inset-bottom,0px);
+  --links:env(safe-area-inset-left,0px); --rechts:env(safe-area-inset-right,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;}
-canvas{display:block;image-rendering:pixelated;}
+[hidden]{display:none !important;}
+html,body{height:100%;overflow:hidden;overscroll-behavior:none;background:var(--bg);color:var(--text);font-family:var(--system);}
+canvas#spiel{display:block;image-rendering:pixelated;touch-action:none;outline:none !important;}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;}
+.sr-only:focus-within{position:fixed;inset:auto 16px 16px 16px;width:auto;height:auto;overflow:auto;clip:auto;clip-path:none;white-space:normal;
+  background:#0f1420;color:var(--text);padding:14px 16px;z-index:45;border:2px solid var(--akzent);font-size:.95rem;line-height:1.5;}
+.sr-only:focus-within a{color:var(--akzent);}
+kbd{font-family:var(--pixel);font-size:.6rem;color:var(--akzent);}
+.touch .nur-tastatur{display:none !important;}
+html:not(.touch) .nur-touch{display:none !important;}
+button{font:inherit;color:inherit;}
 
 /* ===== Titel-Overlay ===== */
 #titel{
   position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:26px;text-align:center;
-  background:rgba(10,14,24,0.35);transition:opacity .6s ease;
+  align-items:center;justify-content:flex-start;text-align:center;
+  padding:calc(24px + var(--oben)) 16px calc(12px + var(--unten));overflow:auto;
+  background:rgba(10,14,24,0.55);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
+  transition:opacity .5s ease;
 }
 #titel.aus{opacity:0;pointer-events:none;}
-.titel-sub{font-family:var(--pixel);font-size:clamp(0.55rem,1.6vw,0.8rem);
-  color:#fff;text-shadow:2px 2px 0 rgba(0,0,0,0.8);line-height:1.9;}
-.titel-name{font-family:var(--pixel);font-size:clamp(1.6rem,6vw,3.2rem);color:#fff;
-  line-height:1.35;text-shadow:3px 3px 0 rgba(0,0,0,0.75), -2px -2px 0 rgba(0,0,0,0.4);}
-.titel-tag{font-family:var(--pixel);font-size:clamp(0.5rem,1.4vw,0.7rem);color:var(--akzent);
-  letter-spacing:0.2em;text-shadow:2px 2px 0 rgba(0,0,0,0.8);}
+.titel-kasten{width:100%;max-width:680px;display:flex;flex-direction:column;align-items:center;gap:16px;margin:auto 0;}
+.titel-portraet{width:88px;height:88px;object-fit:cover;border:3px solid var(--akzent);
+  box-shadow:4px 4px 0 rgba(0,0,0,0.55);background:#222;}
+.titel-sub{font-family:var(--pixel);font-size:clamp(0.6rem,1.5vw,0.78rem);color:#fff;
+  text-shadow:2px 2px 0 rgba(0,0,0,0.85);line-height:1.9;}
+.titel-name{font-family:var(--pixel);font-size:clamp(1.7rem,6vw,3.2rem);color:#fff;
+  line-height:1.35;text-shadow:3px 3px 0 rgba(0,0,0,0.8), -2px -2px 0 rgba(0,0,0,0.4);}
+.titel-tag{font-family:var(--pixel);font-size:clamp(0.55rem,1.4vw,0.72rem);color:var(--akzent);
+  letter-spacing:0.18em;line-height:1.9;text-shadow:2px 2px 0 rgba(0,0,0,0.85);max-width:30ch;}
+.titel-profil{font-size:clamp(0.98rem,1.25vw,1.12rem);line-height:1.55;color:#fff;
+  text-shadow:1px 1px 0 rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.6);max-width:36rem;}
+.titel-profil b{color:var(--akzent);}
+.titel-knoepfe{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:4px;}
 #playBtn{
-  font-family:var(--pixel);font-size:clamp(0.9rem,2.4vw,1.3rem);
-  color:#fff;background:#e2574c;border:none;cursor:pointer;
-  padding:18px 54px 15px;box-shadow:0 6px 0 #9c352d, 4px 10px 0 rgba(0,0,0,0.45);
+  font-family:var(--pixel);font-size:clamp(0.9rem,2.2vw,1.2rem);
+  color:#fff;background:var(--rot);border:none;cursor:pointer;
+  padding:18px 46px 15px;box-shadow:0 6px 0 #9c352d, 4px 10px 0 rgba(0,0,0,0.45);
   transition:transform .08s ease, box-shadow .08s ease;
 }
-#playBtn:hover{transform:translateY(3px);box-shadow:0 3px 0 #9c352d, 3px 6px 0 rgba(0,0,0,0.45);}
-.titel-escape{font-family:var(--pixel);font-size:0.6rem;color:#fff;
-  text-shadow:2px 2px 0 rgba(0,0,0,0.8);margin-top:8px;}
-.titel-escape a{color:var(--akzent);}
-#sprachBtn{
-  position:absolute;top:16px;right:16px;
-  font-family:var(--pixel);font-size:0.7rem;color:var(--text);
-  background:rgba(23,30,46,0.9);border:2px solid var(--linie);cursor:pointer;
-  padding:10px 14px 8px;box-shadow:3px 3px 0 rgba(0,0,0,0.5);
+#playBtn:hover,#playBtn:focus-visible{transform:translateY(3px);box-shadow:0 3px 0 #9c352d, 3px 6px 0 rgba(0,0,0,0.45);outline:none;}
+.knopf-sekundaer{
+  font-family:var(--pixel);font-size:clamp(0.62rem,1.4vw,0.78rem);line-height:1.5;
+  color:var(--akzent);background:rgba(15,20,32,0.92);border:3px solid var(--akzent);cursor:pointer;
+  padding:15px 22px 12px;text-decoration:none;display:inline-flex;align-items:center;
+  box-shadow:0 6px 0 #7a5900, 4px 10px 0 rgba(0,0,0,0.45);
+  transition:transform .08s ease, box-shadow .08s ease;
 }
-#sprachBtn:hover{border-color:var(--akzent);color:var(--akzent);}
+.knopf-sekundaer:hover,.knopf-sekundaer:focus-visible{transform:translateY(3px);box-shadow:0 3px 0 #7a5900, 3px 6px 0 rgba(0,0,0,0.45);outline:none;}
+.titel-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;font-size:1rem;}
+.titel-links a{color:#fff;text-decoration:underline;text-decoration-color:var(--akzent);text-underline-offset:4px;
+  text-shadow:1px 1px 0 rgba(0,0,0,0.9);}
+.titel-links a:hover,.titel-links a:focus-visible{color:var(--akzent);}
+.titel-hinweis{font-family:var(--pixel);font-size:clamp(0.6rem,1.1vw,0.66rem);line-height:2;color:#d6dce8;
+  text-shadow:2px 2px 0 rgba(0,0,0,0.85);max-width:48ch;}
+.titel-fuss{flex:0 0 auto;margin-top:18px;text-align:center;font-size:.85rem;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+.titel-fuss button{background:none;border:none;color:var(--gedimmt);cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:6px 2px;}
+.titel-fuss button:hover,.titel-fuss button:focus-visible{color:var(--akzent);}
+.sprach-toggle{
+  font-family:var(--pixel);font-size:0.62rem;color:var(--gedimmt);cursor:pointer;
+  background:rgba(23,30,46,0.92);border:2px solid var(--linie);padding:9px 10px 7px;
+  box-shadow:3px 3px 0 rgba(0,0,0,0.5);display:inline-flex;gap:8px;align-items:center;line-height:1;
+}
+.sprach-toggle span[data-l].aktiv{color:var(--akzent);}
+.sprach-toggle .sep{opacity:.5;}
+.sprach-toggle:hover,.sprach-toggle:focus-visible{border-color:var(--akzent);outline:none;}
+#sprachBtn{position:absolute;top:calc(14px + var(--oben));right:calc(14px + var(--rechts));}
 
 /* ===== HUD ===== */
-#hud{position:fixed;top:12px;left:12px;z-index:20;display:none;gap:10px;align-items:center;
-  font-family:var(--pixel);font-size:0.6rem;}
-#hud .hud-box{background:rgba(15,20,32,0.92);border:2px solid var(--akzent);
-  padding:10px 14px 8px;color:var(--akzent);font-size:0.68rem;
-  box-shadow:3px 3px 0 rgba(0,0,0,0.5);}
-#hud .hud-box.fertig{color:#141002;background:var(--akzent);
-  animation:pulsieren 1.1s ease-in-out infinite;}
+#hud{position:fixed;top:calc(10px + var(--oben));left:calc(10px + var(--links));right:calc(10px + var(--rechts));
+  z-index:20;display:none;justify-content:space-between;align-items:flex-start;gap:8px;pointer-events:none;}
+#hud.an{display:flex;}
+.hud-links,.hud-rechts{display:flex;flex-wrap:wrap;gap:6px;pointer-events:auto;align-items:flex-start;}
+.hud-rechts{justify-content:flex-end;}
+.hud-box{background:rgba(15,20,32,0.92);border:2px solid var(--akzent);padding:9px 12px 7px;color:var(--akzent);
+  font-family:var(--pixel);font-size:0.66rem;line-height:1;box-shadow:3px 3px 0 rgba(0,0,0,0.5);}
+.hud-box.bump{animation:bump .35s ease;}
+.hud-box.fertig{color:#141002;background:var(--akzent);animation:pulsieren 1.1s ease-in-out infinite;}
+.hud-balken{display:flex;gap:2px;margin-top:7px;height:5px;}
+.hud-balken span{display:block;height:100%;background:#2a3550;flex:1 1 auto;position:relative;overflow:hidden;}
+.hud-balken span i{position:absolute;left:0;top:0;bottom:0;width:var(--anteil,0%);}
+.hud-balken .weg i{background:var(--akzent);} .hud-balken .projekte i{background:var(--blau);}
+.hud-balken .engagement i{background:var(--gruen);} .hud-balken .extra i{background:var(--rot);}
+.hud-btn{font-family:var(--pixel);font-size:0.6rem;line-height:1;color:var(--text);cursor:pointer;
+  background:rgba(15,20,32,0.88);border:2px solid var(--linie);padding:10px 11px 8px;text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;min-height:34px;}
+.hud-btn:hover,.hud-btn:focus-visible{border-color:var(--akzent);color:var(--akzent);outline:none;}
+.hud-btn kbd{opacity:.65;}
+.hud-btn.an{border-color:var(--akzent);color:var(--akzent);}
 @keyframes pulsieren{0%,100%{transform:scale(1);}50%{transform:scale(1.07);}}
-#hilfe{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:20;display:none;
-  font-family:var(--pixel);font-size:0.55rem;color:#fff;text-shadow:2px 2px 0 rgba(0,0,0,0.8);
-  background:rgba(15,20,32,0.6);padding:8px 14px 6px;border:2px solid var(--linie);}
-#klassischLink{position:fixed;top:12px;right:12px;z-index:20;display:none;
-  font-family:var(--pixel);font-size:0.55rem;color:var(--text);text-decoration:none;
-  background:rgba(15,20,32,0.85);border:2px solid var(--linie);padding:8px 12px 6px;}
-#klassischLink:hover{border-color:var(--akzent);color:var(--akzent);}
-#sprachBtnSpiel{position:fixed;top:50px;right:12px;z-index:20;display:none;
-  font-family:var(--pixel);font-size:0.55rem;color:var(--text);cursor:pointer;
-  background:rgba(15,20,32,0.85);border:2px solid var(--linie);padding:8px 12px 6px;}
-#sprachBtnSpiel:hover{border-color:var(--akzent);color:var(--akzent);}
+@keyframes bump{0%{transform:scale(1);}40%{transform:scale(1.15);}100%{transform:scale(1);}}
+#hilfe{position:fixed;bottom:calc(10px + var(--unten));left:50%;transform:translateX(-50%);z-index:20;display:none;
+  font-family:var(--pixel);font-size:0.6rem;line-height:1.7;color:#fff;text-shadow:2px 2px 0 rgba(0,0,0,0.8);
+  background:rgba(15,20,32,0.7);padding:7px 14px 5px;border:2px solid var(--linie);white-space:nowrap;}
+#hilfe.an{display:block;}
+@media (max-width:699px){
+  #hud{flex-direction:column;align-items:stretch;}
+  .hud-rechts{justify-content:flex-start;}
+  .hud-box{font-size:0.6rem;padding:8px 10px 6px;}
+  .hud-btn{font-size:0.6rem;padding:8px 8px 6px;min-height:34px;}
+  #hilfe{font-size:0.6rem;white-space:normal;text-align:center;max-width:calc(100vw - 32px);}
+}
+.touch #hilfe{display:none !important;}
+
+/* ===== Prompt über der Figur, Toast, Ortsbanner ===== */
+#prompt{position:fixed;left:0;top:0;z-index:22;display:none;transform:translate(-50%,-100%);
+  background:rgba(15,20,32,0.95);border:2px solid var(--akzent);color:#fff;padding:7px 11px 6px;
+  font-size:.92rem;line-height:1.2;white-space:nowrap;box-shadow:3px 3px 0 rgba(0,0,0,0.5);cursor:pointer;
+  max-width:calc(100vw - 24px);text-overflow:ellipsis;overflow:hidden;}
+#prompt.an{display:block;}
+#prompt kbd,#prompt .tipp{font-family:var(--pixel);font-size:.6rem;color:var(--akzent);margin-left:8px;
+  animation:blinken 1.2s steps(2) 8;}
+#prompt .tipp{display:none;} .touch #prompt kbd{display:none;} .touch #prompt .tipp{display:inline;}
+#toast{position:fixed;left:50%;bottom:calc(58px + var(--unten));transform:translateX(-50%) translateY(8px);z-index:23;
+  background:rgba(15,20,32,0.95);border:2px solid var(--akzent);color:#fff;padding:12px 16px 11px;
+  font-size:.95rem;line-height:1.4;max-width:min(520px,calc(100vw - 32px));text-align:center;
+  box-shadow:4px 4px 0 rgba(0,0,0,0.5);opacity:0;pointer-events:none;transition:opacity .2s, transform .2s;}
+#toast.an{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
+#toast a{color:var(--akzent);}
+.touch #toast{bottom:auto;top:calc(130px + var(--oben));}
+#ortBanner{position:fixed;left:50%;top:22%;transform:translateX(-50%);z-index:21;text-align:center;pointer-events:none;
+  opacity:0;transition:opacity .35s ease;}
+#ortBanner.an{opacity:1;}
+#ortBanner .ort-name{font-family:var(--pixel);font-size:clamp(1rem,3.4vw,1.8rem);color:#fff;
+  text-shadow:3px 3px 0 rgba(0,0,0,0.85);letter-spacing:.06em;}
+#ortBanner .ort-sub{font-family:var(--pixel);font-size:clamp(.5rem,1.3vw,.7rem);color:var(--akzent);margin-top:12px;
+  text-shadow:2px 2px 0 rgba(0,0,0,0.85);line-height:1.8;}
 
 /* ===== Stations-Karte (Modal) ===== */
-#modal{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;
-  background:rgba(5,8,15,0.7);padding:18px;}
-#modal.an{display:flex;}
+#modal{position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;
+  background:rgba(5,8,15,0.7);padding:18px;opacity:0;transition:opacity .15s ease;}
+#modal.sichtbar{opacity:1;}
 .modal-karte{
   background:var(--karte);border:3px solid var(--akzent);max-width:560px;width:100%;
-  max-height:82vh;overflow-y:auto;padding:26px 28px;box-shadow:8px 8px 0 rgba(0,0,0,0.5);
+  max-height:min(82vh,82dvh);overflow-y:auto;padding:26px 28px;box-shadow:8px 8px 0 rgba(0,0,0,0.5);
+  transform:translateY(8px);transition:transform .15s ease;
 }
-.modal-karte.gruen{border-color:var(--gruen);}
-.modal-ort{font-family:var(--pixel);font-size:0.55rem;color:var(--gedimmt);
-  text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;}
-.modal-karte h2{font-family:var(--pixel);font-size:0.95rem;line-height:1.7;
-  color:var(--akzent);margin-bottom:14px;}
-.modal-karte.gruen h2{color:var(--gruen);}
+#modal.sichtbar .modal-karte{transform:translateY(0);}
+.modal-karte.gruen{border-color:var(--gruen);} .modal-karte.blau{border-color:var(--blau);} .modal-karte.rot{border-color:var(--rot);}
+.modal-ort{font-family:var(--pixel);font-size:0.6rem;color:var(--gedimmt);
+  text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;line-height:1.7;}
+.modal-karte h2{font-family:var(--pixel);font-size:0.95rem;line-height:1.7;color:var(--akzent);margin-bottom:14px;}
+.modal-karte.gruen h2{color:var(--gruen);} .modal-karte.blau h2{color:var(--blau);} .modal-karte.rot h2{color:var(--rot);}
 .modal-karte p{color:var(--text);font-size:0.98rem;line-height:1.65;margin-bottom:12px;}
+.modal-karte p.fakt{font-size:.9rem;color:#cfd6e2;border-left:3px solid var(--linie);padding-left:10px;}
+.modal-karte p.steckbrief{background:rgba(245,179,1,0.08);border:1px solid rgba(245,179,1,0.35);padding:10px 12px;}
 .modal-karte a{color:var(--akzent);}
+.modal-karte h3{font-family:var(--pixel);font-size:.62rem;color:var(--gedimmt);margin:16px 0 8px;line-height:1.7;}
 .modal-schliessen{
-  font-family:var(--pixel);font-size:0.65rem;margin-top:8px;cursor:pointer;
-  background:var(--akzent);color:#141002;border:none;padding:12px 20px 10px;
+  font-family:var(--pixel);font-size:0.68rem;margin-top:8px;cursor:pointer;
+  background:var(--akzent);color:#141002;border:none;padding:13px 20px 11px;
   box-shadow:4px 4px 0 rgba(0,0,0,0.5);
 }
-.modal-schliessen:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 rgba(0,0,0,0.5);}
+.modal-schliessen kbd{color:#141002;opacity:.6;margin-left:6px;}
+.modal-schliessen:hover,.modal-schliessen:focus-visible{transform:translate(2px,2px);box-shadow:2px 2px 0 rgba(0,0,0,0.5);outline:2px solid #fff;}
 
 /* ===== NPC-Dialog (RPG-Textbox) ===== */
 #npcDialog{
-  position:fixed; left:50%; bottom:70px; transform:translateX(-50%) translateY(12px);
-  z-index:25; width:min(560px, calc(100vw - 32px));
-  background:rgba(15,20,32,0.96);
-  border:3px solid var(--akzent);
-  box-shadow:6px 6px 0 rgba(0,0,0,0.5);
-  padding:16px 20px 14px;
-  opacity:0; pointer-events:none;
-  transition:opacity .18s ease, transform .18s ease;
+  position:fixed;left:50%;bottom:calc(70px + var(--unten));transform:translateX(-50%) translateY(12px);
+  z-index:25;width:min(560px,calc(100vw - 32px));
+  background:rgba(15,20,32,0.96);border:3px solid var(--akzent);box-shadow:6px 6px 0 rgba(0,0,0,0.5);
+  padding:16px 44px 16px 20px;opacity:0;pointer-events:none;transition:opacity .18s ease, transform .18s ease;
 }
-#npcDialog.an{ opacity:1; transform:translateX(-50%) translateY(0); }
-#npcName{
-  font-family:var(--pixel); font-size:0.62rem; color:var(--akzent);
-  text-transform:uppercase; letter-spacing:0.1em;
-  display:inline-block; margin-bottom:8px;
-  background:rgba(245,179,1,0.12); border:1px solid rgba(245,179,1,0.4);
-  padding:5px 10px 3px;
+#npcDialog.an{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
+#npcName{font-family:var(--pixel);font-size:0.6rem;color:var(--akzent);text-transform:uppercase;letter-spacing:0.1em;
+  display:inline-block;margin-bottom:8px;background:rgba(245,179,1,0.12);border:1px solid rgba(245,179,1,0.4);padding:5px 10px 3px;line-height:1.5;}
+#npcText{color:var(--text);font-size:0.98rem;line-height:1.55;}
+.npc-hinweis{position:absolute;right:12px;bottom:8px;font-family:var(--pixel);font-size:0.6rem;color:var(--gedimmt);
+  animation:blinken 1.2s steps(2) 8;}
+#npcZu{position:absolute;right:8px;top:8px;width:28px;height:28px;background:none;border:2px solid var(--linie);
+  color:var(--gedimmt);cursor:pointer;font-size:1rem;line-height:1;}
+#npcZu:hover,#npcZu:focus-visible{border-color:var(--akzent);color:var(--akzent);outline:none;}
+@keyframes blinken{50%{opacity:0.25;}}
+.touch #npcDialog{bottom:calc(18px + 170px + 16px + var(--unten));}
+@media (orientation:landscape) and (max-height:500px){
+  .touch #npcDialog{left:auto;right:calc(90px + var(--rechts));transform:none;bottom:calc(14px + var(--unten));width:min(440px,calc(100vw - 300px));}
+  .touch #npcDialog.an{transform:none;}
+  .touch #toast{top:calc(58px + var(--oben));bottom:auto;}
 }
-#npcText{ color:var(--text); font-size:0.98rem; line-height:1.55; }
-.npc-hinweis{
-  position:absolute; right:12px; bottom:8px;
-  font-family:var(--pixel); font-size:0.5rem; color:var(--gedimmt);
-  animation:blinken 1.2s steps(2) infinite;
-}
-@keyframes blinken{ 50%{ opacity:0.25; } }
 
-/* ===== Mobile D-Pad ===== */
-#dpad{position:fixed;bottom:18px;left:18px;z-index:20;display:none;
-  grid-template-columns:repeat(3,54px);grid-template-rows:repeat(3,54px);gap:4px;opacity:0.85;}
-#dpad button{font-family:var(--pixel);font-size:1rem;color:var(--text);
-  background:rgba(23,30,46,0.9);border:2px solid var(--linie);cursor:pointer;}
-#dpad button:active{background:var(--akzent);color:#141002;}
-@media (pointer:coarse){ #dpad.an{display:grid;} #hilfe{display:none !important;} }
+/* ===== Mobile Steuerung ===== */
+#dpad{position:fixed;bottom:calc(18px + var(--unten));left:calc(18px + var(--links));z-index:20;display:none;
+  grid-template-columns:repeat(3,54px);grid-template-rows:repeat(3,54px);gap:4px;opacity:0.85;touch-action:none;
+  -webkit-user-select:none;user-select:none;}
+#dpad button{font-family:var(--pixel);font-size:1rem;color:var(--text);background:rgba(23,30,46,0.9);
+  border:2px solid var(--linie);cursor:pointer;touch-action:none;-webkit-tap-highlight-color:transparent;}
+#dpad button:active,#dpad button.gedrueckt{background:var(--akzent);color:#141002;}
+#aktionBtn{position:fixed;bottom:calc(26px + var(--unten));right:calc(22px + var(--rechts));z-index:20;display:none;
+  width:66px;height:66px;font-family:var(--pixel);font-size:1rem;color:#141002;background:var(--akzent);
+  border:3px solid #141002;box-shadow:0 5px 0 #7a5900;cursor:pointer;opacity:.9;touch-action:none;
+  -webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;}
+#aktionBtn:active{transform:translateY(3px);box-shadow:0 2px 0 #7a5900;}
+.touch #dpad.an{display:grid;} .touch #aktionBtn.an{display:block;}
+@media (orientation:landscape) and (max-height:500px){
+  #dpad{grid-template-columns:repeat(3,42px);grid-template-rows:repeat(3,42px);bottom:calc(12px + var(--unten));left:calc(12px + var(--links));}
+  #dpad button{font-size:.8rem;}
+  #aktionBtn{width:56px;height:56px;bottom:calc(16px + var(--unten));right:calc(16px + var(--rechts));}
+}
+
+/* ===== Übersichtskarte ===== */
+#karte{position:fixed;inset:0;z-index:35;display:flex;align-items:center;justify-content:center;background:rgba(5,8,15,0.75);padding:14px;}
+.karte-kasten{background:var(--karte);border:3px solid var(--akzent);box-shadow:8px 8px 0 rgba(0,0,0,0.5);
+  padding:18px 20px 16px;width:min(920px,100%);max-height:min(92vh,92dvh);overflow:auto;
+  display:grid;grid-template-columns:minmax(0,1.4fr) minmax(220px,1fr);gap:18px 22px;}
+.karte-kasten h2{font-family:var(--pixel);font-size:.8rem;color:var(--akzent);grid-column:1/-1;line-height:1.6;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+#karteCanvas{width:100%;aspect-ratio:48/34;image-rendering:pixelated;border:2px solid var(--linie);background:#0b1020;display:block;}
+.karte-liste{font-size:.92rem;line-height:1.5;}
+.karte-liste h3{font-family:var(--pixel);font-size:.58rem;margin:10px 0 6px;line-height:1.7;}
+.karte-liste h3.weg{color:var(--akzent);} .karte-liste h3.projekte{color:var(--blau);}
+.karte-liste h3.engagement{color:var(--gruen);} .karte-liste h3.extra{color:var(--rot);}
+.karte-liste ul{list-style:none;padding:0;} .karte-liste li{color:var(--gedimmt);} .karte-liste li.offen{color:var(--text);}
+.karte-liste li.offen::before{content:"○ ";color:var(--akzent);} .karte-liste li:not(.offen)::before{content:"● ";color:#5a6579;}
+.karte-legende{font-size:.82rem;color:var(--gedimmt);grid-column:1;}
+.karte-knoepfe{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;margin-top:4px;}
+.karte-knoepfe .hud-btn{font-size:.6rem;}
+@media (max-width:699px){.karte-kasten{grid-template-columns:1fr;} .karte-legende{grid-column:1;}}
+
+@media (prefers-reduced-motion: reduce){
+  .hud-box.fertig,#prompt kbd,#prompt .tipp,.npc-hinweis{animation:none;}
+  #titel,#modal,.modal-karte,#toast,#npcDialog,#ortBanner{transition:none;}
+}
 </style>
 </head>
 <body>
 
-<canvas id="spiel"></canvas>
+<canvas id="spiel" tabindex="-1" role="img" aria-label="Spielwelt: eine Pixel-Karte von Douala über Berlin und den Oberharz nach Freiburg. Mit den Pfeiltasten läuft man zu den Stationen; ENTER öffnet die Karte einer Station. Der Inhalt aller Stationen steht auch in der Zeitungsausgabe."></canvas>
 
 <div id="titel">
-  <button id="sprachBtn" title="Sprache wechseln / switch language">EN</button>
-  <p class="titel-sub" id="titelSub">Wirtschaftsinformatik · KI · Operations Research<br>Portfolio</p>
-  <h1 class="titel-name">BORIS<br>DJIOGHO</h1>
-  <p class="titel-tag" id="titelTag">EINE REISE VON DOUALA NACH FREIBURG</p>
-  <button id="playBtn">PLAY</button>
-  <p class="titel-escape" id="titelEscape">Keine Zeit zu erkunden? <a href="portfolio-de.html">Klassisches Portfolio →</a></p>
+  <button id="sprachBtn" class="sprach-toggle" type="button" aria-label="Sprache wählen / choose language"><span data-l="de">DE</span><span class="sep">|</span><span data-l="en">EN</span></button>
+  <div class="titel-kasten">
+    <img class="titel-portraet" src="assets/boris.jpg" alt="Porträt von Boris Djiogho" width="88" height="88">
+    <p class="titel-sub" id="titelSub">Wirtschaftsinformatik · KI · Operations Research</p>
+    <h1 class="titel-name">BORIS<br>DJIOGHO</h1>
+    <p class="titel-tag" id="titelTag">EINE REISE VON DOUALA NACH FREIBURG</p>
+    <p class="titel-profil" id="titelProfil"><b>M.Sc. Wirtschaftsinformatik</b> · Berufseinstieg an der Schnittstelle von KI, Daten und Geschäftsprozessen · Freiburg, hybrid oder remote</p>
+    <div class="titel-knoepfe">
+      <button id="playBtn" type="button">PLAY</button>
+      <a class="knopf-sekundaer" id="lebenslaufBtn" href="portfolio-de.html?direkt=1">LEBENSLAUF LESEN</a>
+    </div>
+    <p class="titel-links" id="titelLinks">
+      <a href="https://www.linkedin.com/in/boris-morgan-djiogho-9a6396157/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/Boris-djiogho" target="_blank" rel="noopener">GitHub</a>
+      <a href="cv/Lebenslauf_Boris_Djiogho.pdf" target="_blank" rel="noopener" id="titelPdf">Lebenslauf (PDF)</a>
+      <a href="mailto:djioghomorgan@yahoo.com">E-Mail</a>
+    </p>
+    <p class="titel-hinweis" id="titelHinweis">3 KERNSTATIONEN IN 2 MINUTEN<br>23 STATIONEN FÜR DIE GANZE GESCHICHTE<br>PFEILTASTEN ODER KLICK: LAUFEN · ENTER: ÖFFNEN</p>
+  </div>
+  <p class="titel-fuss"><button type="button" id="neuStartBtn" hidden>Neu starten</button><button type="button" id="impressumBtn">Impressum · Datenschutz · Credits</button></p>
 </div>
+
+<section id="kurzprofil" class="sr-only" lang="de">
+  <h1>Boris Morgan Djiogho Keou</h1>
+  <p>Wirtschaftsinformatiker (M.Sc., TU Clausthal) in Freiburg im Breisgau. Berufseinstieg an der Schnittstelle von KI, Daten und Geschäftsprozessen. Fast vier Jahre Werkstudent im Bereich Digital Solutions bei Forvis Mazars, Masterarbeit zur Tourenplanung für Elektrofahrzeuge (MILP mit Gurobi und ALNS-Metaheuristik), Projekte mit LLM-Pipelines, FastAPI, Spring Boot und Streamlit. Französisch (Muttersprache), Deutsch und Englisch.</p>
+  <p>Diese Startseite ist eine erkundbare Pixel-Spielwelt. Alle Inhalte gibt es auch als klassische Ansicht:</p>
+  <ul>
+    <li><a href="portfolio-de.html?direkt=1">Klassische Ansicht (Deutsch)</a></li>
+    <li><a href="portfolio-en.html?direkt=1">Classic view (English)</a></li>
+    <li><a href="cv/Lebenslauf_Boris_Djiogho.pdf">Lebenslauf (PDF)</a></li>
+    <li><a href="https://www.linkedin.com/in/boris-morgan-djiogho-9a6396157/">LinkedIn</a></li>
+    <li><a href="https://github.com/Boris-djiogho">GitHub</a></li>
+  </ul>
+  <p>Projekte: <a href="https://github.com/Boris-djiogho/lv2cad">LV2CAD</a>, <a href="https://github.com/Boris-djiogho/kurare-healthhack-2026">Kurare</a>, <a href="https://github.com/Boris-djiogho/evrp-spd-thesis">E-Fahrzeug-Tourenplanung (Masterarbeit)</a>, <a href="https://github.com/Boris-djiogho/llm-data-pipeline">LLM-Datenpipeline</a>, <a href="https://github.com/Boris-djiogho/taxi-microservices">Taxi-Simulation</a>, <a href="https://github.com/Boris-djiogho/pctsp-heuristics">PC-TSP-Heuristiken</a>, <a href="https://github.com/Boris-djiogho/jssp-fico-xpress">Job-Shop-Scheduling</a>.</p>
+</section>
+
+<noscript>
+  <div lang="de" style="position:fixed;inset:0;z-index:50;background:#0f1420;color:#e8ecf4;padding:32px 20px;font-family:sans-serif;line-height:1.6;overflow:auto">
+    <h1 style="font-size:1.4rem;margin-bottom:12px">Boris Morgan Djiogho Keou</h1>
+    <p>Wirtschaftsinformatiker (M.Sc.) in Freiburg. Die Spielwelt auf dieser Seite braucht JavaScript. Alle Inhalte gibt es auch ohne:</p>
+    <p style="margin-top:12px"><a style="color:#f5b301" href="portfolio-de.html?direkt=1">Zeitungsausgabe (Deutsch)</a> · <a style="color:#f5b301" href="portfolio-en.html?direkt=1">Newspaper edition (English)</a> · <a style="color:#f5b301" href="cv/Lebenslauf_Boris_Djiogho.pdf">Lebenslauf (PDF)</a></p>
+  </div>
+</noscript>
 
 <div id="hud">
-  <div class="hud-box" id="zaehler">STATIONEN 0 / 21</div>
+  <div class="hud-links">
+    <div class="hud-box" id="zaehler" aria-live="polite">
+      <span id="zaehlerText">STATIONEN 0 / 23</span>
+      <div class="hud-balken" aria-hidden="true"><span class="weg"><i></i></span><span class="projekte"><i></i></span><span class="engagement"><i></i></span><span class="extra"><i></i></span></div>
+    </div>
+  </div>
+  <div class="hud-rechts">
+    <button class="hud-btn" id="karteBtn" type="button"><span id="karteBtnText">KARTE</span><kbd class="nur-tastatur">M</kbd></button>
+    <button class="hud-btn" id="kontaktBtn" type="button"><span id="kontaktBtnText">KONTAKT</span><kbd class="nur-tastatur">C</kbd></button>
+    <button class="hud-btn" id="tonBtn" type="button" aria-pressed="false"><span id="tonBtnText">♪ AUS</span></button>
+    <a class="hud-btn" id="klassischLink" href="portfolio-de.html?direkt=1">ZEITUNG</a>
+    <button id="sprachBtnSpiel" class="sprach-toggle" type="button" aria-label="Sprache wählen / choose language"><span data-l="de">DE</span><span class="sep">|</span><span data-l="en">EN</span></button>
+  </div>
 </div>
-<a id="klassischLink" href="index.html">Klassische Ansicht</a>
-<button id="sprachBtnSpiel" title="Sprache wechseln / switch language">EN</button>
-<div id="hilfe">Pfeiltasten / WASD: laufen · Stationen betreten öffnet die Karte · ENTER schließt · Sammle alle Stationen!</div>
+<div id="hilfe">Pfeile / Klick: laufen · ENTER: öffnen · M: Karte · C: Kontakt</div>
 
-<div id="dpad">
-  <span></span><button data-r="up">▲</button><span></span>
-  <button data-r="left">◀</button><span></span><button data-r="right">▶</button>
-  <span></span><button data-r="down">▼</button><span></span>
+<div id="prompt" role="button" tabindex="-1"><span id="promptText"></span><kbd>ENTER</kbd><span class="tipp">ANTIPPEN</span></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="ortBanner" aria-hidden="true"><div class="ort-name" id="ortName"></div><div class="ort-sub" id="ortSub"></div></div>
+
+<div id="dpad" role="group" aria-label="Steuerkreuz">
+  <span></span><button type="button" data-r="up" aria-label="hoch">▲</button><span></span>
+  <button type="button" data-r="left" aria-label="links">◀</button><span></span><button type="button" data-r="right" aria-label="rechts">▶</button>
+  <span></span><button type="button" data-r="down" aria-label="runter">▼</button><span></span>
 </div>
+<button id="aktionBtn" type="button" aria-label="Aktion: Karte öffnen oder sprechen">A</button>
 
-<div id="npcDialog">
+<div id="npcDialog" role="status" aria-live="polite" aria-hidden="true">
   <span id="npcName"></span>
   <p id="npcText"></p>
-  <span class="npc-hinweis">[ENTER]</span>
+  <span class="npc-hinweis nur-tastatur">[ENTER]</span>
+  <button id="npcZu" type="button" aria-label="Dialog schließen">×</button>
 </div>
 
-<div id="modal">
+<div id="karte" hidden>
+  <div class="karte-kasten" role="dialog" aria-modal="true" aria-labelledby="karteTitel">
+    <h2><span id="karteTitel">ÜBERSICHT</span><span id="karteStand"></span></h2>
+    <canvas id="karteCanvas" width="192" height="136" aria-label="Übersichtskarte der Spielwelt"></canvas>
+    <div class="karte-liste" id="karteListe"></div>
+    <p class="karte-legende" id="karteLegende"></p>
+    <div class="karte-knoepfe">
+      <button class="hud-btn" id="karteZu" type="button"><span id="karteZuText">SCHLIESSEN</span><kbd class="nur-tastatur">M</kbd></button>
+      <button class="hud-btn" id="karteReset" type="button"></button>
+      <button class="hud-btn" id="karteImpressum" type="button"></button>
+    </div>
+  </div>
+</div>
+
+<div id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitel">
   <div class="modal-karte" id="modalKarte">
     <p class="modal-ort" id="modalOrt"></p>
     <h2 id="modalTitel"></h2>
     <div id="modalText"></div>
-    <button class="modal-schliessen" id="modalZu">WEITER [ENTER]</button>
+    <button class="modal-schliessen" id="modalZu" type="button"><span id="modalZuText">WEITER</span><kbd class="nur-tastatur">ENTER</kbd></button>
   </div>
 </div>
 
+<script src="assets/spiel/atlas.js"></script>
 <script src="game.js"></script>
 </body>
 </html>
